@@ -21,6 +21,7 @@ class PositionModel(db.Model):
     self.task_id = task_id
     self.sequence_id = sequence_id
     self.sequence_no = sequence_no
+    
 
   
   def json(self):
@@ -33,14 +34,13 @@ class PositionModel(db.Model):
 
 
   def json_task(self):
-    # print(self.tasks.all())
     return {'id': self.id,
             'position_name': self.position_name,
             'task_id': self.task_id,
             'sequence_id': self.sequence_id,
             'sequence_no': self.sequence_no,
-            'tasks': [task.json() for task in self.tasks.all()]}
-            # 'tasks': [task.json() for task in self.tasks.first()]}
+            # 'tasks': [task.json() for task in self.tasks.all()]}
+            'tasks': self.tasks.task_description}
 
 
   @classmethod

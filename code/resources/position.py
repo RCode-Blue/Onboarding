@@ -18,8 +18,8 @@ class Position(Resource):
 
   def get(self, positionname):
     position = PositionModel.find_by_name(positionname)
-    print('-------------------')
-    print(position.task_id)
+    # print('-------------------')
+    # print(position.task_id)
     if position:
       return position.json_task()
     return {'message': 'Position not found'}, 404

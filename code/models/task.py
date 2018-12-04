@@ -17,7 +17,7 @@ class TaskModel(db.Model):
 
 
   # position_id = db.Column(db.Integer, db.ForeignKey('position.id'))
-  # position = db.relationship('PositionModel', lazy = 'dynamic')
+  position = db.relationship('PositionModel', backref='pos')
 
 
   def __init__(self, task_name, task_description, completed, completion_date, checked_off_by_id, instructor_id):
