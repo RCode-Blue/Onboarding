@@ -14,7 +14,8 @@ class Sequence(Resource):
   def get(self, sequencename):
     sequence = SequenceModel.find_by_name(sequencename)
     if sequence:
-      return sequence.json()
+      # return sequence.json()
+      return sequence.json_positions()
     return {'message': 'Sequence not found'}, 404
 
 

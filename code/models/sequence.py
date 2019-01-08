@@ -10,7 +10,7 @@ class SequenceModel(db.Model):
   sequence_name = db.Column(db.String)
   sequence_description = db.Column(db.Text)
 
-  # tasks = db.relationship('PositionModel', lazy='dynamic')
+  # positions = db.relationship('PositionModel')
 
 
   def __init__(self, sequence_name, sequence_description):
@@ -24,10 +24,15 @@ class SequenceModel(db.Model):
             'sequence_description': self.sequence_description}
 
 
-
-  
-
-
+  def json_positions(self):
+    # print('*****************')
+    # print(self.positions)
+    # print('*****************')
+    return {'id': self.id,
+            'sequence_name': self.sequence_name,
+            'sequence_description': self.sequence_description,
+            'positions': [position.json_tasks() for position in self.positions]
+    }
 
   @classmethod
   def find_by_name(cls, name):
