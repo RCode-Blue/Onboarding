@@ -198,6 +198,36 @@ SQLExecute = "INSERT INTO users"
 SQLExecute += "(name, job_title, team) VALUES"
 SQLExecute += "('Sienna Grant', 'IT Manager', 'Sydney')"
 cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO users"
+SQLExecute += "(name, job_title, team) VALUES"
+SQLExecute += "('Bilbo Baggins', 'Uncle', 'The Shire')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO users"
+SQLExecute += "(name, job_title, team) VALUES"
+SQLExecute += "('Obi-Wan Kenobi', 'Jedi Master', 'Coruscant')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO users"
+SQLExecute += "(name, job_title, team) VALUES"
+SQLExecute += "('Frodo Baggins', 'Ring-Bearer', 'The Shire')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO users"
+SQLExecute += "(name, job_title, team) VALUES"
+SQLExecute += "('Luke Skywalker', 'Jedi', 'Tattooine')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO users"
+SQLExecute += "(name, job_title, team) VALUES"
+SQLExecute += "('Samwise Gamgee', 'Gardener', 'The Shire')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO users"
+SQLExecute += "(name, job_title, team) VALUES"
+SQLExecute += "('Chewbacca', 'Wookie', 'Kashyyyk')"
+cursor.execute(SQLExecute)
 #endregion
 
 
@@ -292,6 +322,46 @@ cursor.execute(SQLExecute)
 SQLExecute = "INSERT INTO tasks"
 SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
 SQLExecute += "('Interview three leaders within CareerTrackers to learn about their journey in the organisation', 'AA018', 6, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Take ring to Mordor', 'LL001', 22, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Celebrate 111st birthday', 'LL002', 22, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Meet at the Prancing Pony', 'LL003', 22, 'Change name to Underhill')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Form a fellowship', 'LL004', 22, 'Be careful of Boromir')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Go to Jedha', 'SS001', 23, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Beam plans from Scarif', 'SS002', 23, 'Callsign is Rogue One')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Hide plans in Droid', 'SS003', 23, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO tasks"
+SQLExecute += "(task_description, task_name, instructor_id, task_notes) VALUES"
+SQLExecute += "('Drop bomb in thermal exhaust', 'SS004', 23, 'Use the Force')"
 cursor.execute(SQLExecute)
 #endregion
 
@@ -455,6 +525,37 @@ SQLExecute += "(template_id, task_id, position_no) VALUES"
 SQLExecute += "(3, 12, 11)"
 cursor.execute(SQLExecute)
 
+
+
+# Middle-Earth
+SQLExecute = "INSERT INTO positions"
+SQLExecute += "(template_id, task_id, position_no) VALUES"
+SQLExecute += "(7, 19, 4)"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO positions"
+SQLExecute += "(template_id, task_id, position_no) VALUES"
+SQLExecute += "(7, 21, 2)"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO positions"
+SQLExecute += "(template_id, task_id, position_no) VALUES"
+SQLExecute += "(7, 20, 1)"
+cursor.execute(SQLExecute)
+
+
+
+# Rebel Alliance
+SQLExecute = "INSERT INTO positions"
+SQLExecute += "(template_id, task_id, position_no) VALUES"
+SQLExecute += "(8, 23, 1)"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO positions"
+SQLExecute += "(template_id, task_id, position_no) VALUES"
+SQLExecute += "(8, 25, 3)"
+cursor.execute(SQLExecute)
+
 #endregion
 
 
@@ -480,6 +581,15 @@ SQLExecute += "(template_name, description) VALUES"
 SQLExecute += "('Perth Team Onboarding', 'Onboarding tasks for Perth Student Advisors')"
 cursor.execute(SQLExecute)
 
+SQLExecute = "INSERT INTO templates"
+SQLExecute += "(template_name, description) VALUES"
+SQLExecute += "('Ring-Bearer Tasks', 'There and back again')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO templates"
+SQLExecute += "(template_name, description) VALUES"
+SQLExecute += "('Jedi Training', 'How to destroy a Death Star')"
+cursor.execute(SQLExecute)
 #endregion
 
 
@@ -495,7 +605,6 @@ SQLExecute += "(template_id, description, city, start_date, employee_id, manager
 SQLExecute += "(1, 'Sydney Onboarding for Patrick Gilchrist', 'Sydney', '02-03-2019', 13, 2, 14)"
 cursor.execute(SQLExecute)
 
-
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
 SQLExecute += "(2, 'Melbourne Onboarding for Grace Mitchell', 'Melbourne', '22-02-2019', 7, 3, 10)"
@@ -506,7 +615,6 @@ SQLExecute += "(template_id, description, city, start_date, employee_id, manager
 SQLExecute += "(2, 'Melbourne Onboarding for Logan Henn', 'Melbourne', '22-02-2019', 8, 3, 9)"
 cursor.execute(SQLExecute)
 
-
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
 SQLExecute += "(3, 'Brisbane Onboarding for Skye Kossak', 'Brisbane', '29-02-2019', 16, 5, 20)"
@@ -515,6 +623,16 @@ cursor.execute(SQLExecute)
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
 SQLExecute += "(3, 'Brisbane Onboarding for Mackenzie Jeffrey', 'Brisbane', '21-01-2019', 17, 5, 19)"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sets"
+SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
+SQLExecute += "(7, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26)"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sets"
+SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
+SQLExecute += "(8, 'Luke's Jedi training checklist', 'Tattooine', '21-01-2019', 25, 23, 27)"
 cursor.execute(SQLExecute)
 #endregion
 
@@ -533,8 +651,17 @@ cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sequences "
 SQLExecute += "(set_id) VALUES"
-SQLExecute += "(5)"
+SQLExecute += "(35)"
 cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id) VALUES"
+SQLExecute += "(4)"
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id) VALUES"
+SQLExecute += "(5)"
+
 #endregion
 
 

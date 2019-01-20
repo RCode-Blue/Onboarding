@@ -7,12 +7,14 @@ class PositionModel(db.Model):
   __tablename__ = 'positions'
 
   id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-  template_id = db.Column(db.Integer)
+  template_id = db.Column(db.Integer, db.ForeignKey('templates.id'))
   task_id = db.Column(db.Integer, db.ForeignKey('tasks.id')) #use table name
   position_no = db.Column(db.Integer)
 
   task = db.relationship('TaskModel')
-  # sequence = db.relationship('SequenceModel', backref='pos')
+  
+  template = db.relationship('TemplateModel')
+  # template = db.relationship('TemplateModel', back_populates = 'positions') #use ref name
 
   def __init__(self, template_id, task_id, position_no):
     self.template_id = template_id
@@ -21,7 +23,7 @@ class PositionModel(db.Model):
 
 
   def json(self):
-    return {'id': self.id,
+    return {'position_id': self.id,
             'template_id': self.template_id,
             'task_id': self.task_id,
             'position_no': self.position_no
@@ -29,8 +31,11 @@ class PositionModel(db.Model):
 
 
   def json_task(self):
-    return {'id': self.id,
+    # print(self.template.template_name)
+    return {'position_id': self.id,
             'template_id': self.template_id,
+            'template_name': self.template.template_name,
+            'template_description': self.template.description,
             'task_id': self.task_id,
             'position_no': self.position_no,
             # 'tasks': [task.json() for task in self.tasks.all()]}

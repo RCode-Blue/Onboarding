@@ -28,27 +28,48 @@ class Position(Resource):
 
 
   # GET (id)
-  # def get(self, id):
-  #   position = PositionModel.find_by_id(id)
-  #   if position:
-  #     return position.json_task()
-  #   return {'message': 'Position not found'}, 404
- 
-
-  def get(self, templateid):
-    position = PositionModel.find_by_template(templateid)
-    # print(position)
+  #region
+  def get(self, _id):
+    position = PositionModel.find_by_id(_id)
     if position:
-      return position.json()
+      return position.json_task()
     return {'message': 'Position not found'}, 404
+  #endregion
 
 
+  # GET (templateid)
+  #region
+  # def get(self, templateid):
+  #   position = PositionModel.find_by_template(templateid)
+  #   # print(len(position))
+  #   if position:
+  #     return {'positions': [position.json_task() for position in position]}
+  #     # return position.json()
+  #   return {'message': 'Position not found'}, 404
+  #endregion
 
-  # GET (template_id, task_id, position_no)
+ 
+ 
+  def post(self, _id):
+    if PositionModel.find_by_id(_id):
+      return {'message': "A position with this id already exists"}, 400
 
-  def post(self, templateid):
     data = Position.parser.parse_args()
-    print(data)
+    # print(data)
+    position = PositionModel(data['template_id'], 
+      data['task_id'], 
+      data['position_no'])
+
+    try:
+      position.save_to_db()
+
+    except:
+      return {"message": "An error occured inserting the position"}, 500
+
+    return position.json(),201
+
+
+
 
   def put(self, positionname):
     pass
@@ -56,7 +77,7 @@ class Position(Resource):
    
   def delete(self, positionname):
     pass
-
+ 
 
 
 class Positions(Resource):

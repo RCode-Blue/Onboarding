@@ -6,48 +6,32 @@ class TemplateModel(db.Model):
   __tablename__ = 'templates'
 
   id = db.Column(db.Integer, primary_key = True)
-  sequence_id = db.Column(db.String, db.ForeignKey('sequences.id'))
+  # position_id = db.Column(db.String, db.ForeignKey('sequences.id'))
 
+  template_name = db.Column(db.String)
   description = db.Column(db.String)
-  city = db.Column(db.String)
-  start_date = db.Column(db.String)
-  employee_id = db.Column(db.Integer)
-  manager_id = db.Column(db.Integer)
-  buddy_id = db.Column(db.Integer)
+  
+  positions = db.relationship('PositionModel', back_populates = 'template')
 
-  sequences = db.relationship('SequenceModel')
+  # sequences = db.relationship('SequenceModel')
 
-  def __init__(self, sequence_id, description, city, start_date, employee_id, manager_id, buddy_id):
-    self.sequence_id = sequence_id
+  def __init__(self, template_name, description):
+    self.template_name = template_name
     self.description = description
-    self.city = city
-    self.start_date = start_date
-    self.employee_id = employee_id
-    self.manager_id = manager_id
-    self.buddy_id = buddy_id
+    
 
   # JSON
   def json(self):
     return{'id': self.id,
-           'sequence_id': self.sequence_id, 
-           'description': self.description,
-           'city': self.city,
-           'start_date': self.start_date,
-           'employee_id': self.employee_id,
-           'manager_id': self.manager_id,
-           'buddy_id': self.buddy_id
+           'template_name': self.template_name, 
+           'description': self.description
            }
 
-  
-  def json_sequence(self):
-    print('-----------------------------')
-    print(self.sequences.positions)
-    print('-----------------------------')
-
+  def json_positions(self):
     return {
+      'template_name': self.template_name,
       'description': self.description,
-      'sequence_name': self.sequences.sequence_name
-      # 'positions': [sequence.position.json_tasks() for sequence.position in self.sequence.positions]
+      'positions': [position.json_task() for position in self.positions]
     }
 
 
