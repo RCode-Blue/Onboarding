@@ -49,7 +49,8 @@ class Position(Resource):
   #endregion
 
  
- 
+  # POST(_id)
+  #region
   def post(self, _id):
     if PositionModel.find_by_id(_id):
       return {'message': "A position with this id already exists"}, 400
@@ -67,7 +68,7 @@ class Position(Resource):
       return {"message": "An error occured inserting the position"}, 500
 
     return position.json(),201
-
+  #endregion
 
 
 

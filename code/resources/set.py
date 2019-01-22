@@ -27,3 +27,22 @@ class Set(Resource):
       return set.json_template()
     return {'message': 'Set not found'}, 404
   #endregion
+
+
+  # POST
+
+
+
+  # DELETE
+
+
+
+  # PUT
+
+
+
+
+
+class Sets(Resource):
+  def get(self):
+    return {"sets": [set.json() for set in SetModel.query.all()]}

@@ -79,7 +79,13 @@ cursor.execute(create_table)
 #region
 create_table = "CREATE TABLE IF NOT EXISTS sequences "
 create_table += "(id INTEGER PRIMARY KEY, "
-create_table += "set_id integer)"
+create_table += "set_id integer, "
+create_table += "task_description string, "
+create_table += "completed boolean, "
+create_table += "completion_date string, "
+create_table += "checked_off_by integer, "
+create_table += "instructor_id integer, "
+create_table += "task_notes string)"
 
 cursor.execute(create_table)
 #endregion
@@ -530,17 +536,17 @@ cursor.execute(SQLExecute)
 # Middle-Earth
 SQLExecute = "INSERT INTO positions"
 SQLExecute += "(template_id, task_id, position_no) VALUES"
-SQLExecute += "(7, 19, 4)"
+SQLExecute += "(5, 19, 4)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO positions"
 SQLExecute += "(template_id, task_id, position_no) VALUES"
-SQLExecute += "(7, 21, 2)"
+SQLExecute += "(5, 21, 2)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO positions"
 SQLExecute += "(template_id, task_id, position_no) VALUES"
-SQLExecute += "(7, 20, 1)"
+SQLExecute += "(5, 20, 1)"
 cursor.execute(SQLExecute)
 
 
@@ -548,12 +554,12 @@ cursor.execute(SQLExecute)
 # Rebel Alliance
 SQLExecute = "INSERT INTO positions"
 SQLExecute += "(template_id, task_id, position_no) VALUES"
-SQLExecute += "(8, 23, 1)"
+SQLExecute += "(6, 23, 1)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO positions"
 SQLExecute += "(template_id, task_id, position_no) VALUES"
-SQLExecute += "(8, 25, 3)"
+SQLExecute += "(6, 25, 3)"
 cursor.execute(SQLExecute)
 
 #endregion
@@ -627,12 +633,12 @@ cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
-SQLExecute += "(7, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26)"
+SQLExecute += "(5, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id) VALUES"
-SQLExecute += "(8, 'Luke's Jedi training checklist', 'Tattooine', '21-01-2019', 25, 23, 27)"
+SQLExecute += "(6, 'Luke''s Jedi training checklist', 'Tattooine', '21-01-2019', 25, 23, 27)"
 cursor.execute(SQLExecute)
 #endregion
 
@@ -651,16 +657,13 @@ cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sequences "
 SQLExecute += "(set_id) VALUES"
-SQLExecute += "(35)"
+SQLExecute += "(5)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sequences "
 SQLExecute += "(set_id) VALUES"
-SQLExecute += "(4)"
+SQLExecute += "(7)"
 
-SQLExecute = "INSERT INTO sequences "
-SQLExecute += "(set_id) VALUES"
-SQLExecute += "(5)"
 
 #endregion
 

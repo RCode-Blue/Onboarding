@@ -15,7 +15,11 @@ class SetModel(db.Model):
   manager_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   buddy_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+  # sequence_id = db.Column(db.Integer, db.ForeignKey('sequences.id'))
   template = db.relationship('TemplateModel')
+
+  # sequence = db.relationship('SequenceModel')
+  sequence = db.relationship('SequenceModel', back_populates = '_set', uselist = False)
 
   def __init__(self, 
                 template_id, 
@@ -55,7 +59,9 @@ class SetModel(db.Model):
             'employee_id': self.employee_id,
             'manager_id': self.manager_id,
             'buddy_id': self.buddy_id,
-            'template': [self.template.json_positions()]
+            'template': [self.template.json_positions()],
+            # 'sequences': [sequence.json() for sequence in self.sequences]
+            'sequence': [self.sequence.json()]
             }
 
 

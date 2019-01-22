@@ -7,36 +7,61 @@ class SequenceModel(db.Model):
   __tablename__ = 'sequences'
 
   id = db.Column(db.Integer, primary_key = True)
-  sequence_name = db.Column(db.String)
-  sequence_description = db.Column(db.Text)
+  set_id = db.Column(db.Integer, db.ForeignKey('sets.id'))
+  task_description = db.Column(db.Text)
+  completed = db.Column(db.Boolean)
+  completion_date = db.Column(db.Text)
+  checked_off_by = db.Column(db.Integer, db.ForeignKey('users.id'))
+  instructor_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  task_notes = db.Column(db.Text)
 
-  # positions = db.relationship('PositionModel')
+  _set = db.relationship('SetModel', back_populates = 'sequence')
 
 
-  def __init__(self, sequence_name, sequence_description):
-    self.sequence_name = sequence_name
-    self.sequence_description = sequence_description
+  def __init__(self, 
+              set_id,
+              task_description,
+              completed,
+              completion_date,
+              checked_off_by,
+              instructor_id,
+              task_notes):
+    self.set_id = set_id
+    self.task_description = task_description
+    self.completed = completed
+    self.completion_date = completion_date
+    self.checked_off_by = checked_off_by
+    self.instructor_id = instructor_id
+    self.task_notes = task_notes
 
 
   def json(self):
     return {'id': self.id,
-            'sequence_name': self.sequence_name,
-            'sequence_description': self.sequence_description}
+            'set_id': self.set_id,
+            'task_description': self.task_description,
+            'completed': self.completed,
+            'completion_date': self.completion_date,
+            'instructor_id': self.instructor_id,
+            'task_notes': self.task_notes
+            }
 
 
   def json_positions(self):
-    # print('*****************')
-    # print(self.positions)
-    # print('*****************')
     return {'id': self.id,
-            'sequence_name': self.sequence_name,
-            'sequence_description': self.sequence_description,
-            'positions': [position.json_tasks() for position in self.positions]
-    }
+            'set_id': self.set_id,
+            'task_description': self.task_description,
+            'completed': self.completed,
+            'completion_date': self.completion_date,
+            'instructor_id': self.instructor_id,
+            'task_notes': self.task_notes,
+            'set': [self._set.json_template()]
+            # 'set': [self._set.json()]
+            }
 
-  @classmethod
-  def find_by_name(cls, name):
-    return cls.query.filter_by(sequence_name = name).first()
+
+
+  # def populate(self):
+  #   self.task_description = self.set.description
 
   @classmethod
   def find_by_id(cls, _id):

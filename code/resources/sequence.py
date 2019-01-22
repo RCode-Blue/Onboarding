@@ -3,29 +3,39 @@ from models.sequence import SequenceModel
 
 class Sequence(Resource):
   parser = reqparse.RequestParser()
-  parser.add_argument('sequence_name',
-    type = str
-  )
-  parser.add_argument('sequence_description',
-    type = str
-  )
+  parser.add_argument('set_id', 
+    type = int)
+  parser.add_argument('task_description',
+    type = str)
+  parser.add_argument('completed',
+    type = bool)
+  parser.add_argument('completion_date',
+    type = str)
+  parser.add_argument('checked_off_by',
+    type = int)
+  parser.add_argument('instructor_id',
+    type = int)
+  parser.add_argument('task_notes',
+    type = str)
 
 
-  def get(self, sequencename):
-    sequence = SequenceModel.find_by_name(sequencename)
+  # GET
+  def get(self, _id):
+    sequence = SequenceModel.find_by_id(_id)
     if sequence:
       # return sequence.json()
       return sequence.json_positions()
     return {'message': 'Sequence not found'}, 404
 
 
-  def post(self, sequencename):
-    if SequenceModel.find_by_name(sequencename):
+  # POST
+  def post(self, _id):
+    if SequenceModel.find_by_name(_id):
       return {'message': 'A sequence with that name already exists'}
 
     data = Sequence.parser.parse_args()
     print(data)
-    sequence = SequenceModel(sequencename, data['sequence_description'])
+    sequence = SequenceModel(_id, data['sequence_description'])
     # sequence = SequenceModel(sequencename, **data)
 
     try:
@@ -37,26 +47,32 @@ class Sequence(Resource):
     return sequence.json(), 201
 
 
-  def delete(self, sequencename):
-    sequence = SequenceModel.find_by_name(sequencename)
+  # DELETE
+  def delete(self, _id):
+    sequence = SequenceModel.find_by_name(_id)
     if sequence:
       sequence.delete_from_db()
 
     return{"message": "Sequence deleted"}
 
 
-  def put(self, sequencename):
-    data = Sequence.parser.parse_args()
-    sequence = SequenceModel.find_by_name(sequencename)
+  # PUT
+  # def put(self, _id):
+  #   data = Sequence.parser.parse_args()
+  #   sequence = SequenceModel.find_by_id(_id)
 
-    if sequence is None:
-      sequence = SequenceModel(sequencename, data['sequence_description'])
+  #   if sequence is None:
+  #     sequence = SequenceModel(_id, 
+  #       data['set_id'],
+  #       '','','','','')
 
-    else:
-      sequence.sequence_description = data['sequence_description']
+  #   else:
+  #     sequence.set_id = data['set_id']
 
-    sequence.save_to_db()
-    return sequence.json()
+  #   sequence.save_to_db()
+  #   return sequence.json()
+
+
 
 class Sequences(Resource):
   def get(self):
@@ -64,18 +80,6 @@ class Sequences(Resource):
 
 
   
-class SequenceTasks(Resource):
-  def get(self, sequencename):
-    sequence = SequenceModel.find_by_name(sequencename)
-    if sequence:
-      
-
-      return sequence.json()
-
-
-
-    return {'message': 'Sequence not found'}, 404
-
 
 
 
