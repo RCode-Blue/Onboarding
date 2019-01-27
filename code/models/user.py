@@ -21,7 +21,7 @@ class UserModel(db.Model):
     return {'id': self.id,
             'name': self.name,
             'job_title': self.job_title,
-            'team': self.team}
+            'location': self.team}
 
   @classmethod
   def find_by_id(cls, _id):

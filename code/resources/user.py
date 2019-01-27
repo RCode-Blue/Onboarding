@@ -33,3 +33,6 @@ class User(Resource):
 
 
 # USERS
+class Users(Resource):
+  def get(self):
+    return {'users': [user.json() for user in UserModel.query.all()]}

@@ -38,20 +38,20 @@ class Task(Resource):
   #   return {'message': 'Task not found'}, 404
   #endregion
 
-  # GET (taskId) ----------------
+  # GET (_id) ----------------
   #region
-  # def get(self, taskId):
-  #   task = TaskModel.find_by_id(taskId)
-  #   if task:
-  #     return task.json()
-  #   return {'message': 'Task not found'}, 404
-  #endregion
-
-  def get(self, taskDescription):
-    task = TaskModel.find_by_description(taskDescription)
+  def get(self, _id):
+    task = TaskModel.find_by_id(_id)
     if task:
       return task.json()
     return {'message': 'Task not found'}, 404
+  #endregion
+
+  # def get(self, taskDescription):
+  #   task = TaskModel.find_by_description(taskDescription)
+  #   if task:
+  #     return task.json()
+  #   return {'message': 'Task not found'}, 404
 
 
 
