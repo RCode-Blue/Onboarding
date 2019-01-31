@@ -52,16 +52,16 @@ class PositionModel(db.Model):
     return cls.query.filter_by(id = _id).first()
 
   @classmethod
-  def find_by_name(cls, positionname):
-    return cls.query.filter_by(position_name = positionname).first()
-
-  @classmethod
   def find_by_sequence(cls, sequenceid):
     return cls.query.filter_by(sequence_id = sequenceid)
 
   @classmethod
   def find_by_template(cls, templateid):
     return cls.query.filter_by(template_id = templateid)
+
+  @classmethod
+  def find_by_position(cls, templateid, taskid, positionno):
+    return cls.query.filter_by(template_id = templateid, task_id = taskid, position_no = positionno).first()
 
 
   def save_to_db(self):

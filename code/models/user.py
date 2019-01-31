@@ -7,21 +7,31 @@ class UserModel(db.Model):
   __tablename__ = 'users'
 
   id = db.Column(db.Integer, primary_key = True)
+  email = db.Column(db.String)
   name = db.Column(db.String)
-  job_title = db.Column(db.String)
-  team = db.Column(db.String)
+  avatar = db.Column(db.String)
+  active = db.Column(db.Boolean)
+  tokens = db.Column(db.String)
+  created_at = db.Column(db.String)
 
-  def __init__(self, name, job_title, team):
+  def __init__(self, email, name):
+    self.email = email
     self.name = name
-    self.job_title = job_title
-    self.team = team
+    # self.avatar = avatar
+    # self.active = active
+    # self.tokens = tokens
+    # self.created_at = created_at
 
 
   def json(self):
-    return {'id': self.id,
-            'name': self.name,
-            'job_title': self.job_title,
-            'location': self.team}
+    return {
+      'id': self.id,
+      'email': self.email,
+      'name': self.name,
+      'avatar': self.avatar,
+      'active': self.active,
+      'tokens': self.tokens,
+      'created_at': self.created_at}
 
   @classmethod
   def find_by_id(cls, _id):

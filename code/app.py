@@ -9,6 +9,7 @@ from resources.user import User, Users
 from resources.template import Template, Templates
 from resources.set import Set, Sets, AddSequence
 
+
 # Configs & initialisations
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -22,10 +23,10 @@ api.add_resource(Users, '/users')
 api.add_resource(User, '/user/<string:userid>')
 
 api.add_resource(Tasks, '/tasks')
-api.add_resource(Task,  '/task/<string:_id>')
+api.add_resource(Task,  '/task')
 
 api.add_resource(Positions, '/positions')
-api.add_resource(Position,  '/position/<int:_id>')
+api.add_resource(Position,  '/position')
 
 api.add_resource(Templates, '/templates')
 api.add_resource(Template, '/template/<int:templateid>')

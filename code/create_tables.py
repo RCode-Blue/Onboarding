@@ -12,9 +12,12 @@ cursor = connection.cursor()
 #region
 create_table = "CREATE TABLE IF NOT EXISTS users "
 create_table += "(id INTEGER PRIMARY KEY, "
+create_table += "email string, "
 create_table += "name string, "
-create_table += "job_title string, "
-create_table += "team string)"
+create_table += "avatar string, "
+create_table += "active boolean, "
+create_table += "tokens text, "
+create_table += "created_at string)"
 
 cursor.execute(create_table)
 #endregion
@@ -102,138 +105,138 @@ cursor.execute(create_table)
 # Data: users table ------------------------------------
 #region
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Sophia Muntz', 'Senior Advisor', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Sophia Muntz', 'sophia.muntz@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Jett Allardyce', 'Senior Advisor', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Jett Allardyce', 'jett.allardyce@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Alica Ramsbotham', 'Senior Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Alica Ramsbotham', 'alica.ramsbotham@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Patrick Schlunke', 'Senior Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Patrick Schlunke', 'patrick.schlunke@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Austin Ashcroft', 'Senior Advisor', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Austin Ashcroft', 'austin.ashcroft@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Rebecca Ramsay', 'Senior Advisor', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Rebecca Ramsay', 'rebecca.ramsay@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Grace Michell', 'Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Grace Michell', 'gracemichell@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Logan Henn', 'Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Logan Henn', 'logan.henn@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Rory Clare', 'Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Rory Clare', 'rory.clare@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Maddison O''Brien', 'Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Maddison O''Brien', 'maddison.obrien@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('John Mathew', 'Advisor', 'Melbourne')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('John Mathew', 'john.mathew@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Tyler Holland', 'Advisor', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Tyler Holland', 'tyler.holland@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Patrick Gilchrist', 'Advisor', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Patrick Gilchrist', 'patrick.gilchrist@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Zoe Ibbott', 'Advisor', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Zoe Ibbott', 'zoe.ibbott@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Lucy Mulga', 'Advisor', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Lucy Mulga', 'lucy.mulga@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Skye Kossak', 'Advisor', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Skye Kossak', 'skye.kossak@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Mackenzie Jeffrey', 'Advisor', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Mackenzie Jeffrey', 'mackenzie.jeffrey@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Cody Taubman', 'Advisor', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Cody Taubman', 'cody.taubman@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Matilda Holyman', 'Advisor', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Matilda Holyman', 'matilda.holyman@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Patrick Blakeney', 'Finance Manager', 'Brisbane')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Patrick Blakeney', 'patrick.blakeney@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Sienna Grant', 'IT Manager', 'Sydney')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Sienna Grant', 'sienna.grant@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Bilbo Baggins', 'Uncle', 'The Shire')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Bilbo Baggins', 'bilbo.baggins@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Obi-Wan Kenobi', 'Jedi Master', 'Coruscant')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Obi-Wan Kenobi', 'obiwan.kenobi@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Frodo Baggins', 'Ring-Bearer', 'The Shire')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Frodo Baggins', 'frodo.baggins@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Luke Skywalker', 'Jedi', 'Tattooine')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Luke Skywalker', 'luke.skywalker@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Samwise Gamgee', 'Gardener', 'The Shire')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Samwise Gamgee', 'samwise.gamgee@test.cx')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO users"
-SQLExecute += "(name, job_title, team) VALUES"
-SQLExecute += "('Chewbacca', 'Wookie', 'Kashyyyk')"
+SQLExecute += "(name, email) VALUES"
+SQLExecute += "('Chewbacca', 'chewbacca@test.cx')"
 cursor.execute(SQLExecute)
 #endregion
 
