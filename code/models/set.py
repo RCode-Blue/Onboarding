@@ -21,8 +21,10 @@ class SetModel(db.Model):
   template = db.relationship('TemplateModel')
 
   # sequence = db.relationship('SequenceModel')
-  # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False, lazy='noload')
-  sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False)
+  sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False, lazy='noload')
+  # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False)
+  # sequence = db.relationship('SequenceModel', uselist = False)
+
   employee = db.relationship('UserModel', foreign_keys=[employee_id])
   manager = db.relationship('UserModel', foreign_keys = [manager_id])
   buddy = db.relationship('UserModel', foreign_keys = [buddy_id])
@@ -56,7 +58,8 @@ class SetModel(db.Model):
             'start_date': self.start_date,
             'employee_id': self.employee_id,
             'manager_id': self.manager_id,
-            'buddy_id': self.buddy_id
+            'buddy_id': self.buddy_id,
+            'sequence_id': self.sequence_id
             }
 
   
@@ -78,6 +81,25 @@ class SetModel(db.Model):
             'buddy': [self.buddy.json()]
             }
 
+
+  # data to be used to create sequence entries
+  def json_sequence(self):
+    return {'set_id': self.id,
+            'template_id': self.template_id,
+            'description': self.description,
+            'city': self.city,
+            'start_date': self.start_date,
+            'employee_id': self.employee_id,
+            'manager_id': self.manager_id,
+            'buddy_id': self.buddy_id,
+            'sequence_id': self.sequence_id,
+            'template': [self.template.json_positions()],
+            # 'sequence': [self.sequence.json()],
+            # 'sequence_id': self.sequence.id,
+            'employee': [self.employee.json()],
+            'manager': [self.manager.json()],
+            'buddy': [self.buddy.json()]
+            }
 
 
   @classmethod

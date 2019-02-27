@@ -30,6 +30,28 @@ class Sequence(Resource):
     return {'message': 'Sequence not found'}, 404
 
   
+  # PUT (modify)
+  def put(self):
+    data = Sequence.parser.parse_args()
+    sequence = SequenceModel.find_by_task_description(data['task_description'])
+
+    # If sequence item exists, error out
+    if sequence:
+      return {"error": "The specified task already exists"}, 500
+    # Otherwise, add new sequence item
+    else:
+      sequence = SequenceModel(
+        data['set_id'],
+        data['task_description'],
+        data['task_position'],
+        data['completed'],
+        data['completion_date'],
+        data['checked_off_by'],
+        data['instructor_id'],
+        data['task_notes'])
+    
+    sequence.save_to_db()
+    # return sequence.json()
 
 
 
@@ -46,6 +68,9 @@ class Sequence(Resource):
 class Sequences(Resource):
   def get(self):
     return {'sequences': [sequence.json() for sequence in SequenceModel.query.all()]}
+
+
+
 
 
 class TaskList(Resource):

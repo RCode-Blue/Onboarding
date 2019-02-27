@@ -70,6 +70,9 @@ class SequenceModel(db.Model):
   def find_by_id(cls, _id):
     return cls.query.filter_by(id = _id).first()
 
+  @classmethod
+  def find_by_task_description(cls, task_description):
+    return cls.query.filter_by(task_description = task_description).first()
   
   @classmethod
   def find_by_set_id(cls, set_id):

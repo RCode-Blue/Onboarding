@@ -18,6 +18,8 @@ class Set(Resource):
     type = int)
   parser.add_argument('buddy_id',
     type = int)
+  parser.add_argument('sequence_id',
+    type = int)
   
 
   # GET(id)
@@ -31,11 +33,12 @@ class Set(Resource):
   #endregion
 
 
-  # POST
+  # POST (create)
+
 
   # DELETE
 
-  # PUT
+  # PUT (edit)
 
 
 
@@ -49,8 +52,8 @@ class AddSequence(Resource):
   parser.add_argument('sequence_id',
     type = int)
 
-  # PUT
-  def put(self, _id):
+  # POST
+  def post(self, _id):
     data = AddSequence.parser.parse_args()
 
     # Get the Set
@@ -58,8 +61,7 @@ class AddSequence(Resource):
     if set:
       if (set.sequence_id):
         return {'message': 'This set is already allocated'}, 400
-      else:
-        SetModel.create_new_sequence(_id, set, data)
+      SetModel.create_new_sequence(_id, set, data)
 
     else:
       return {'error': 'The Set does not exist'}, 400

@@ -37,9 +37,10 @@ class Task(Resource):
     data = Task.parser.parse_args()
     task = TaskModel.find_by_name(data['task_name'])
     if task:
-      task.task_description = data['task_description']
-      task.instructor_id = data['instructor_id']
-      task.task_notes = data['task_notes']
+      return { "error": "The task already exists" }, 500
+      # task.task_description = data['task_description']
+      # task.instructor_id = data['instructor_id']
+      # task.task_notes = data['task_notes']
   
     else:
       task = TaskModel(
