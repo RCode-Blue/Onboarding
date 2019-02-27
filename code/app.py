@@ -26,7 +26,7 @@ api.add_resource(Tasks, '/tasks')
 api.add_resource(Task,  '/task')
 
 api.add_resource(Positions, '/positions')
-api.add_resource(Position,  '/position')
+# api.add_resource(Position,  '/position/<int:position_id>')
 
 api.add_resource(Templates, '/templates')
 api.add_resource(Template, '/template/<int:templateid>')

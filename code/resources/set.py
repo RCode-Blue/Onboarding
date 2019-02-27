@@ -26,6 +26,7 @@ class Set(Resource):
     set = SetModel.find_by_id(_id)
     if set:
       return set.json_template()
+      # return set.json()
     return {'message': 'Set not found'}, 404
   #endregion
 

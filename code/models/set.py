@@ -2,6 +2,7 @@
 import sqlite3
 from db import db
 from models.sequence import SequenceModel
+from models.user import UserModel
 
 # Classes
 class SetModel(db.Model):
@@ -60,8 +61,6 @@ class SetModel(db.Model):
 
   
   def json_template(self):
-    print('----------------------')
-    print(self.sequence)
     return {'set_id': self.id,
             'template_id': self.template_id,
             'description': self.description,
@@ -72,7 +71,7 @@ class SetModel(db.Model):
             'buddy_id': self.buddy_id,
             'sequence_id': self.sequence_id,
             'template': [self.template.json_positions()],
-            'sequence': [self.sequence.json()],
+            # 'sequence': [self.sequence.json()],
             # 'sequence_id': self.sequence.id,
             'employee': [self.employee.json()],
             'manager': [self.manager.json()],

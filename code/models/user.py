@@ -7,30 +7,28 @@ class UserModel(db.Model):
   __tablename__ = 'users'
 
   id = db.Column(db.Integer, primary_key = True)
+  google_id = db.Column(db.String)
   email = db.Column(db.String)
   name = db.Column(db.String)
-  avatar = db.Column(db.String)
-  active = db.Column(db.Boolean)
-  tokens = db.Column(db.String)
+  given_name = db.Column(db.String)
+  family_name = db.Column(db.String)
+  picture = db.Column(db.String)
+  hd = db.Column(db.String)
+  token = db.Column(db.Text)
   created_at = db.Column(db.String)
 
   def __init__(self, email, name):
-    self.email = email
+    # self.email = email
     self.name = name
-    # self.avatar = avatar
-    # self.active = active
-    # self.tokens = tokens
-    # self.created_at = created_at
 
 
   def json(self):
     return {
       'id': self.id,
+      'google_id': self.google_id, 
       'email': self.email,
       'name': self.name,
-      'avatar': self.avatar,
-      'active': self.active,
-      'tokens': self.tokens,
+      'token': self.token,
       'created_at': self.created_at}
 
   @classmethod
