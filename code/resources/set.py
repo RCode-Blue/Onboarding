@@ -4,41 +4,59 @@ from models.sequence import SequenceModel
 
 class Set(Resource):
   parser = reqparse.RequestParser()
-  parser.add_argument('template_id',
-    type = int)
-  parser.add_argument('description',
-    type = str)
-  parser.add_argument('city',
-    type = str)
-  parser.add_argument('start_date',
-    type = str)
-  parser.add_argument('employee_id',
-    type = int)
-  parser.add_argument('manager_id',
-    type = int)
-  parser.add_argument('buddy_id',
-    type = int)
-  parser.add_argument('sequence_id',
-    type = int)
+  parser.add_argument('_id', type = int)
+  parser.add_argument('template_id', type = int)
+  parser.add_argument('description', type = str)
+  parser.add_argument('city', type = str)
+  parser.add_argument('start_date', type = str)
+  parser.add_argument('employee_id', type = int)
+  parser.add_argument('manager_id', type = int)
+  parser.add_argument('buddy_id', type = int)
+  parser.add_argument('sequence_id', type = int)
   
 
   # GET(id)
-  #region
-  def get(self, _id):
-    set = SetModel.find_by_id(_id)
+  def get(self):
+    data = Set.parser.parse_args()
+    set = SetModel.find_by_id(data['_id'])
     if set:
       return set.json_template()
-      # return set.json()
     return {'message': 'Set not found'}, 404
-  #endregion
 
+
+  # PUT (edit)
+  def put(self):
+    data = Set.parser.parse_args()
+    set = SetModel.find_by_set(data['template_id'], data['employee_id'])
+    if set:
+      set = SetModel(
+        data['template_id'],
+        data['description'],
+        data['city'],
+        data['start_date'],
+        data['employee_id'],
+        data['manager_id'],
+        data['buddy_id'],
+        data['sequence_id']
+      )
+
+    try:
+      set.save_to_db()
+      return set.json()
+    except:
+      return {"message": "An error occured inserting the set"}, 500
+
+    
 
   # POST (create)
+  def post(self):
+    pass
 
 
   # DELETE
 
-  # PUT (edit)
+
+
 
 
 

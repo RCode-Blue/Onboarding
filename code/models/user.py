@@ -17,9 +17,10 @@ class UserModel(db.Model):
   token = db.Column(db.Text)
   created_at = db.Column(db.String)
 
-  def __init__(self, email, name):
-    # self.email = email
-    self.name = name
+  def __init__(self, email, given_name, family_name):
+    self.email = email
+    self.given_name = given_name
+    self.family_name = family_name
 
 
   def json(self):
@@ -30,6 +31,11 @@ class UserModel(db.Model):
       'name': self.name,
       'token': self.token,
       'created_at': self.created_at}
+
+
+  @classmethod
+  def find_by_email(cls, email):
+    return cls.query.filter_by(email = email).first()
 
   @classmethod
   def find_by_id(cls, _id):

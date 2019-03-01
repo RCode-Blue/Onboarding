@@ -10,6 +10,7 @@ class SetModel(db.Model):
 
   id = db.Column(db.Integer, primary_key = True, autoincrement = True)
   template_id = db.Column(db.Integer, db.ForeignKey('templates.id'))
+  # template_id = db.Column(db.Integer)
   description = db.Column(db.Text)
   city = db.Column(db.Text)
   start_date = db.Column(db.Text)
@@ -20,9 +21,10 @@ class SetModel(db.Model):
 
   template = db.relationship('TemplateModel')
 
-  # sequence = db.relationship('SequenceModel')
-  sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False, lazy='noload')
-  # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False)
+  # sequence = db.relationship('SequenceModel', back_populates = '_set')
+  sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], lazy='noload')
+  # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False, lazy='noload')
+  # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id])
   # sequence = db.relationship('SequenceModel', uselist = False)
 
   employee = db.relationship('UserModel', foreign_keys=[employee_id])
@@ -47,7 +49,6 @@ class SetModel(db.Model):
     self.manager_id = manager_id
     self.buddy_id = buddy_id
     self.sequence_id = sequence_id
-
 
   
   def json(self):
@@ -131,3 +132,9 @@ class SetModel(db.Model):
   @classmethod
   def find_by_sequence_id(cls, _id):
     return cls.query.filter_by(sequence_id = _id).first()
+
+  @classmethod
+  def find_by_set(cls, templateid, employeeid):
+    return cls.query.filter_by(
+      template_id = templateid,
+      employee_id = employeeid).first()

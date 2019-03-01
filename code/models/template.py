@@ -25,13 +25,15 @@ class TemplateModel(db.Model):
     return{'id': self.id,
            'template_name': self.template_name, 
            'description': self.description
-           }
+    }
+
 
   def json_positions(self):
     return {
       'template_name': self.template_name,
       'description': self.description,
       'positions': [position.json_task() for position in self.positions]
+      # 'positions': [position.json() for position in self.positions]
     }
 
 
@@ -41,10 +43,18 @@ class TemplateModel(db.Model):
     return cls.query.filter_by(id = _id).first()
 
 
+  @classmethod
+  def find_by_template_name(cls, template_name):
+    return cls.query.filter_by(template_name = template_name).first()
+
+
   def save_to_db(self):
     db.session.add(self)
     db.session.commit()
 
   def delete_from_db(self):
+    for position in self.positions:
+      # print(position)
+      position.delete_from_db()
     db.session.delete(self)
     db.session.commit()

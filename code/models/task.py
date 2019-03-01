@@ -16,29 +16,10 @@ class TaskModel(db.Model):
   instructor_id = db.Column(db.Integer)
   task_notes = db.Column(db.Text)
 
-  # position = db.relationship('PositionModel')
-
-
-  # def __init__(self, 
-  #   task_name, 
-  #   task_description, 
-  #   completed, 
-  #   completion_date, 
-  #   checked_off_by, 
-  #   instructor_id, 
-  #   task_notes):
-  #     self.task_name = task_name
-  #     self.task_description = task_description
-  #     self.completed = completed
-  #     self.completion_date = completion_date
-  #     self.checked_off_by = checked_off_by
-  #     self.instructor_id = instructor_id
-  #     self.task_notes = task_notes
-
 
   def __init__(self, 
     task_name, 
-    task_description, 
+    task_description,
     instructor_id, 
     task_notes):
       self.task_name = task_name

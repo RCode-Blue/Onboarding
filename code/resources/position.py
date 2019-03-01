@@ -22,28 +22,6 @@ class Position(Resource):
     return {'message': 'Position not found'}, 404
 
 
- 
-  def post(self):
-    data = Position.parser.parse_args()
-    if PositionModel.find_by_position(data['template_id'], data['task_id'], data['position_no']):
-      return {'message': "A position with this name already exists"}, 400
-
-    data = Position.parser.parse_args()
-    position = PositionModel(
-      data['template_id'], 
-      data['task_id'], 
-      data['position_no'])
-
-    try:
-      position.save_to_db()
-
-    except:
-      return {"message": "An error occured edition the position"}, 500
-
-    return position.json(),201
-
-
-
   # PUT
   def put(self):
     data = Position.parser.parse_args()
@@ -60,13 +38,30 @@ class Position(Resource):
     
     try:
       position.save_to_db()
-
+      return position.json(), 201
     except:
       return {"message": "An error occured inserting the position"}, 500
 
-    return position.json(), 201
 
-  
+  # POST (create)
+  def post(self):
+    data = Position.parser.parse_args()
+    if PositionModel.find_by_position(data['template_id'], data['task_id'], data['position_no']):
+      return {'message': "A position with this name already exists"}, 400
+
+    data = Position.parser.parse_args()
+    position = PositionModel(
+      data['template_id'], 
+      data['task_id'], 
+      data['position_no'])
+
+    try:
+      position.save_to_db()
+    except:
+      return {"message": "An error occured editing the position"}, 500
+
+    return position.json(),201
+
 
   # DELETE
   def delete(self):
@@ -86,17 +81,6 @@ class Positions(Resource):
     return {'positions': [position.json_task() for position in PositionModel.query.all()]}
 
 
-class NewPosition(Resource):
-  parser = reqparse.RequestParser()
-  parser.add_argument('template_id',
-    type = int)
-  parser.add_argument('task_id',
-    type = int)
-  parser.add_argument('position_no',
-    type = int)
 
-  def put(self):
-    data = Task.parser.parse_args()
-    newPosition = PositionModel()
 
 

@@ -1,20 +1,19 @@
 from flask_restful import Resource, reqparse
-from models.user import UserModel
+
+
+
 from datetime import datetime
+
+
+from models.user import UserModel
 
 class User(Resource):
   parser = reqparse.RequestParser()
-  parser.add_argument('name',
-    type = str
-    )
-  parser.add_argument('job_title',
-    type = str
-    )
-  parser.add_argument('team',
-    type = str
-    )
+  parser.add_argument('name', type = str)
+  parser.add_argument('job_title', type = str)
+  parser.add_argument('team', type = str)
 
-  # GET user
+  # GET
   def get(self, userid):
     user = UserModel.find_by_id(userid)
     if user:
@@ -22,14 +21,25 @@ class User(Resource):
     return{'message': 'User not found'}, 404
 
 
-  # POST user
+  # PUT
+  def put(self):
+    pass
 
 
-  # DELETE user
+  # POST
+
+
+  # DELETE
+  def delete(self, userid):
+    user = UserModel.find_by_id(userid)
+    if not user:
+      return {"message": "user not found"}, 404
+      
+    user.delete_from_db()
+    return {"message": "user deleted"}, 200
 
 
 
-  # PUT user
 
 
 # USERS

@@ -61,7 +61,10 @@ class PositionModel(db.Model):
 
   @classmethod
   def find_by_position(cls, templateid, taskid, positionno):
-    return cls.query.filter_by(template_id = templateid, task_id = taskid, position_no = positionno).first()
+    return cls.query.filter_by(
+      template_id = templateid, 
+      task_id = taskid, 
+      position_no = positionno).first()
 
 
   def save_to_db(self):

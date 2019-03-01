@@ -1,13 +1,14 @@
 import sqlite3
 from db import db
-
+# from models.set import SetModel
 
 # Classes
 class SequenceModel(db.Model):
   __tablename__ = 'sequences'
 
   id = db.Column(db.Integer, primary_key = True)
-  set_id = db.Column(db.Integer, db.ForeignKey('sets.id'))
+  # set_id = db.Column(db.Integer, db.ForeignKey('sets.id'))
+  set_id = db.Column(db.Integer)
   task_description = db.Column(db.Text)
   task_position = db.Column(db.Integer)
   completed = db.Column(db.Boolean)
@@ -16,9 +17,12 @@ class SequenceModel(db.Model):
   instructor_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   task_notes = db.Column(db.Text)
 
+  # _set = db.relationship('SetModel')
+  _set = db.relationship('SetModel', back_populates = 'sequence', lazy=True)
   # _set = db.relationship('SetModel', back_populates = 'sequence')
   # _set = db.relationship('SetModel', back_populates = 'sequence', uselist = False)
-  _set = db.relationship('SetModel', foreign_keys=[set_id], back_populates = 'sequence', uselist = False)
+  # _set = db.relationship('SetModel', foreign_keys=[set_id], back_populates = 'sequence', uselist = False)
+  # _set = db.relationship('SetModel', foreign_keys=[set_id], back_populates = 'sequence')
 
 
   def __init__(self, 
