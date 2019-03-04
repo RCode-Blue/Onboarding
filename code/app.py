@@ -1,6 +1,7 @@
 # import libraries
 from flask import Flask
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
 
 from resources.task import Task, Tasks
 from resources.sequence import Sequence, Sequences, TaskList
@@ -8,18 +9,24 @@ from resources.position import Position, Positions
 from resources.user import User, Users
 from resources.template import Template, Templates
 from resources.set import Set, Sets, AddSequence
-from dotenv import load_dotenv
 
+
+from dotenv import load_dotenv
 from resources.google_login import GoogleLogin, GoogleAuthorize
+
+
+from config import DefaultConfig
 
 # Configs & initialisations
 load_dotenv(".env")
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(DefaultConfig)
+
 
 api = Api(app)
-
+jwt = JWTManager(app)
 
 # Endpoints
 api.add_resource(Users, '/users')
