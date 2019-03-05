@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from models.sequence import SequenceModel
+from models.set import SetModel
 
 class Sequence(Resource):
   parser = reqparse.RequestParser()
@@ -71,22 +72,22 @@ class Sequences(Resource):
 
 
 
-
-
 class TaskList(Resource):
-  # parser = reqparse.RequestParser()
-  # parser.add_argument('set_id', 
-  #   type = int)
+  parser = reqparse.RequestParser()
+  parser.add_argument('set_id', type = int)
 
   def get(self, set_id):
     # pass
+    _set = SetModel.find_by_id(set_id)
     tasks = SequenceModel.find_by_set_id(set_id)
     if tasks:
-      # return {'message': 'Tasks found'}
-      # print(tasks)
-      return {'tasks': [task.json() for task in tasks]}
+      # return {'tasks': [task.json() for task in tasks]}
+      # return {'set': _set.json()}
+      return {
+        'set': _set.json(),
+        'tasks': [task.json() for task in tasks]}
+       
     else:
       return {'message': 'No task found'}
-    # return {'tasks': [task.json() for task in tasks]}
 
 

@@ -39,6 +39,7 @@ class PositionModel(db.Model):
             'task_id': self.task_id,
             'position_no': self.position_no,
             # 'tasks': [task.json() for task in self.tasks.all()]}
+            'instructor_id': self.task.instructor_id,
             'task_description': self.task.task_description,
             'completion_date': self.task.completion_date,
             'completed': self.task.completed,

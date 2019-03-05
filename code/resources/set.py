@@ -21,6 +21,7 @@ class Set(Resource):
     set = SetModel.find_by_id(data['_id'])
     if set:
       return set.json_template()
+      # return set.json()
     return {'message': 'Set not found'}, 404
 
 
@@ -36,8 +37,7 @@ class Set(Resource):
         data['start_date'],
         data['employee_id'],
         data['manager_id'],
-        data['buddy_id'],
-        data['sequence_id']
+        data['buddy_id']
       )
 
     try:
@@ -67,19 +67,26 @@ class Sets(Resource):
 
 class AddSequence(Resource):
   parser = reqparse.RequestParser()
-  parser.add_argument('sequence_id',
+  parser.add_argument('set_id',
     type = int)
 
   # POST
-  def post(self, _id):
+  def post(self, set_id):
     data = AddSequence.parser.parse_args()
 
     # Get the Set
-    set = SetModel.find_by_id(_id)
+    set = SetModel.find_by_id(set_id)
+    # If set exists...
     if set:
-      if (set.sequence_id):
-        return {'message': 'This set is already allocated'}, 400
-      SetModel.create_new_sequence(_id, set, data)
+      # ...and it already has an associated sequence, return error message
+      # if (set.sequence_id):
+      if (set.allocated):
+        # return {'message': 'This set is already allocated'}, 400
+        return set.json()
+      # Otherwise create new sequence
+      
+      SetModel.create_new_sequence(set_id, set, data)
+      return set.json()
 
     else:
       return {'error': 'The Set does not exist'}, 400

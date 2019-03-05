@@ -75,7 +75,7 @@ create_table += "start_date string, "
 create_table += "employee_id integer, "
 create_table += "manager_id integer, "
 create_table += "buddy_id integer, "
-create_table += "sequence_id integer)"
+create_table += "allocated integer)"
 
 cursor.execute(create_table)
 #endregion
@@ -609,71 +609,127 @@ cursor.execute(SQLExecute)
 # Data: sets table ------------------------------------
 #region
 SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
+SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, allocated) VALUES"
 SQLExecute += "(1, 'Sydney Onboarding for Tyler Holland', 'Sydney', '01-02-2019', 12, 1, 14, 1)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(1, 'Sydney Onboarding for Patrick Gilchrist', 'Sydney', '02-03-2019', 13, 2, 14, '')"
+SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, allocated) VALUES"
+SQLExecute += "(1, 'Sydney Onboarding for Patrick Gilchrist', 'Sydney', '02-03-2019', 13, 2, 14, 1)"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(2, 'Melbourne Onboarding for Grace Mitchell', 'Melbourne', '22-02-2019', 7, 3, 10, 2)"
+SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, allocated) VALUES"
+SQLExecute += "(5, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26, '')"
 cursor.execute(SQLExecute)
 
-SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(2, 'Melbourne Onboarding for Logan Henn', 'Melbourne', '22-02-2019', 8, 3, 9, '')"
-cursor.execute(SQLExecute)
-
-SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(3, 'Brisbane Onboarding for Skye Kossak', 'Brisbane', '29-02-2019', 16, 5, 20, 3)"
-cursor.execute(SQLExecute)
-
-SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(3, 'Brisbane Onboarding for Mackenzie Jeffrey', 'Brisbane', '21-01-2019', 17, 5, 19, '')"
-cursor.execute(SQLExecute)
-
-SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(5, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26, 4)"
-cursor.execute(SQLExecute)
-
-SQLExecute = "INSERT INTO sets"
-SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, sequence_id) VALUES"
-SQLExecute += "(6, 'Luke''s Jedi training checklist', 'Tattooine', '21-01-2019', 25, 23, 27, 5)"
-cursor.execute(SQLExecute)
 #endregion
 
 
 # Data: sequences table ------------------------------------
 #region
+
+# template 1
+#region
 SQLExecute = "INSERT INTO sequences "
-SQLExecute += "(set_id) VALUES"
-SQLExecute += "(1)"
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Complete and return signed forms', 1, 2, '')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sequences "
-SQLExecute += "(set_id) VALUES"
-SQLExecute += "(3)"
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Collect computer log-in details', 2, 21, '')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sequences "
-SQLExecute += "(set_id) VALUES"
-SQLExecute += "(5)"
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Access to Xero (Payroll System)', 3, 21, '')"
 cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO sequences "
-SQLExecute += "(set_id) VALUES"
-SQLExecute += "(7)"
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Access Slack and CatsOne', 4, 21, '')"
+cursor.execute(SQLExecute)
 
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Develop your personal pitch and CareerTrackers pitch', 5, 2, '')"
+cursor.execute(SQLExecute)
 
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Learn good vs bad recruitment', 6, 3, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Gain an understanding of Student Suitability guidelines', 7, 3, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Learn about the salary sacrificing opportunities', 8, 20, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(1, 'Complete Facebook Training and create your own profile', 9, 4, '')"
+cursor.execute(SQLExecute)
 #endregion
 
+#template 2
+#region
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Participate in an Interview Preparation Training Workshop', 1, 4, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Learn the travel approval process and where to go to access forms', 2, 3, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Introduction to your state office', 3, 5, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Observe student advisors undertake Monthly Meetings', 4, 5, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Complete a one month progress check-in with your manager', 5, 5, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Draft student CVs and gain feedback to ensure they met the standards of the program', 6, 6, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Discuss a transition plan for you to begin taking on contact with corporate partners', 7, 6, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Deliver Program Orientation Workshops and one-on-one', 8, 6, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Interview three leaders within CareerTrackers to learn about their journey in the organisation', 9, 6, '')"
+cursor.execute(SQLExecute)
+
+SQLExecute = "INSERT INTO sequences "
+SQLExecute += "(set_id, task_description, task_position, instructor_id, task_notes) VALUES"
+SQLExecute += "(2, 'Access to Xero (Payroll System)', 10, 21, '')"
+cursor.execute(SQLExecute)
+#endregion
+#endregion
 
 
 

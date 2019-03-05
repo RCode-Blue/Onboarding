@@ -9,7 +9,6 @@ class UserModel(db.Model):
   id = db.Column(db.Integer, primary_key = True)
   google_id = db.Column(db.String)
   email = db.Column(db.String)
-  name = db.Column(db.String)
   given_name = db.Column(db.String)
   family_name = db.Column(db.String)
   picture = db.Column(db.String)
@@ -28,7 +27,8 @@ class UserModel(db.Model):
       'id': self.id,
       'google_id': self.google_id, 
       'email': self.email,
-      'name': self.name,
+      'given_name': self.given_name,
+      'family_name': self.family_name,
       'token': self.token,
       'created_at': self.created_at}
 

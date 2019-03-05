@@ -42,8 +42,8 @@ api.add_resource(Templates, '/templates')
 api.add_resource(Template, '/template')
 
 api.add_resource(Sets, '/sets')
-api.add_resource(Set, '/set/<int:_id>')
-api.add_resource(AddSequence, '/addsequence/<int:_id>')
+api.add_resource(Set, '/set')
+api.add_resource(AddSequence, '/addsequence/<int:set_id>')
 
 api.add_resource(Sequences, '/sequences')
 api.add_resource(Sequence,  '/sequence/<int:_id>')

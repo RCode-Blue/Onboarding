@@ -10,19 +10,19 @@ class SetModel(db.Model):
 
   id = db.Column(db.Integer, primary_key = True, autoincrement = True)
   template_id = db.Column(db.Integer, db.ForeignKey('templates.id'))
-  # template_id = db.Column(db.Integer)
   description = db.Column(db.Text)
   city = db.Column(db.Text)
   start_date = db.Column(db.Text)
   employee_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   manager_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   buddy_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-  sequence_id = db.Column(db.Integer, db.ForeignKey('sequences.id'))
+  allocated = db.Column(db.Boolean)
 
   template = db.relationship('TemplateModel')
+  sequence = db.relationship('SequenceModel', backref='_set', lazy=True)
 
   # sequence = db.relationship('SequenceModel', back_populates = '_set')
-  sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], lazy='noload')
+  # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], lazy='noload')
   # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id], uselist = False, lazy='noload')
   # sequence = db.relationship('SequenceModel', foreign_keys=[sequence_id])
   # sequence = db.relationship('SequenceModel', uselist = False)
@@ -39,8 +39,7 @@ class SetModel(db.Model):
                 start_date,
                 employee_id,
                 manager_id,
-                buddy_id,
-                sequence_id):
+                buddy_id):
     self.template_id = template_id
     self.description = description
     self.city = city
@@ -48,7 +47,6 @@ class SetModel(db.Model):
     self.employee_id = employee_id
     self.manager_id = manager_id
     self.buddy_id = buddy_id
-    self.sequence_id = sequence_id
 
   
   def json(self):
@@ -60,7 +58,7 @@ class SetModel(db.Model):
             'employee_id': self.employee_id,
             'manager_id': self.manager_id,
             'buddy_id': self.buddy_id,
-            'sequence_id': self.sequence_id
+            'allocated': self.allocated
             }
 
   
@@ -73,7 +71,7 @@ class SetModel(db.Model):
             'employee_id': self.employee_id,
             'manager_id': self.manager_id,
             'buddy_id': self.buddy_id,
-            'sequence_id': self.sequence_id,
+            'allocated': self.allocated,
             'template': [self.template.json_positions()],
             # 'sequence': [self.sequence.json()],
             # 'sequence_id': self.sequence.id,
@@ -104,11 +102,12 @@ class SetModel(db.Model):
 
 
   @classmethod
-  def create_new_sequence(cls, _id, set, data):
-    set.sequence_id = data['sequence_id']
+  def create_new_sequence(cls, set_id, set, data):
+    set.allocated = True
+    set.save_to_db()
     
     for position in set.template.positions:
-      newSeq =  SequenceModel(_id, 
+      newSeq =  SequenceModel(set_id, 
         position.task.task_description, 
         position.position_no, 
         position.task.completed, 
@@ -121,7 +120,7 @@ class SetModel(db.Model):
       except:
         return {"message": "An error occured inserting this sequence"}, 500
         
-     # return sequence.json(), 201
+      # return newSeq.json(), 201
 
 
 
@@ -138,3 +137,11 @@ class SetModel(db.Model):
     return cls.query.filter_by(
       template_id = templateid,
       employee_id = employeeid).first()
+
+  def save_to_db(self):
+    db.session.add(self)
+    db.session.commit()
+
+  def delete_from_db(self):
+    db.session.delete(self)
+    db.session.commit()

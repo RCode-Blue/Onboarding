@@ -7,8 +7,8 @@ class SequenceModel(db.Model):
   __tablename__ = 'sequences'
 
   id = db.Column(db.Integer, primary_key = True)
-  # set_id = db.Column(db.Integer, db.ForeignKey('sets.id'))
-  set_id = db.Column(db.Integer)
+  set_id = db.Column(db.Integer, db.ForeignKey('sets.id'))
+  # set_id = db.Column(db.Integer)
   task_description = db.Column(db.Text)
   task_position = db.Column(db.Integer)
   completed = db.Column(db.Boolean)
@@ -17,12 +17,14 @@ class SequenceModel(db.Model):
   instructor_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   task_notes = db.Column(db.Text)
 
+  # set_sequence_id = db.Column(db.Text, db.ForeignKey('_set.set_sequence_id'))
+
   # _set = db.relationship('SetModel')
-  _set = db.relationship('SetModel', back_populates = 'sequence', lazy=True)
+  # _set = db.relationship('SetModel', back_populates = 'sequence', lazy=True)
   # _set = db.relationship('SetModel', back_populates = 'sequence')
   # _set = db.relationship('SetModel', back_populates = 'sequence', uselist = False)
   # _set = db.relationship('SetModel', foreign_keys=[set_id], back_populates = 'sequence', uselist = False)
-  # _set = db.relationship('SetModel', foreign_keys=[set_id], back_populates = 'sequence')
+  # _set = db.relationship('SetModel', back_populates = 'sequence', uselist = False, lazy=True)
 
 
   def __init__(self, 
