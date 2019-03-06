@@ -29,7 +29,7 @@ class Position(Resource):
     if PositionModel.find_by_position(data['template_id'], data['task_id'], data['position_no']):
     # if position:
       # return position.json()
-      return {"message": "This position already exists"}, 500
+      return {"message": "This position has already been allocated to this template"}, 500
 
     position = PositionModel(
       data['template_id'],

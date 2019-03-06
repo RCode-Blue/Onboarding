@@ -25,6 +25,32 @@ class Set(Resource):
     return {'message': 'Set not found'}, 404
 
 
+    
+
+  # POST (create)
+  def post(self):
+    data = Set.parser.parse_args()
+    set = SetModel.find_by_set(data['template_id'], data['employee_id'])
+    if set:
+      return {"message": "This employee has already been allocated a set"}
+    newSet = SetModel(
+      data['template_id'],
+      data['description'],
+      data['city'],
+      data['start_date'],
+      data['employee_id'],
+      data['manager_id'],
+      data['buddy_id']
+    )
+
+    try:
+      newSet.save_to_db()
+      return newSet.json()
+    except:
+      return {"message": "An error occured creating the set"}, 500
+
+
+
   # PUT (edit)
   def put(self):
     data = Set.parser.parse_args()
@@ -46,11 +72,6 @@ class Set(Resource):
     except:
       return {"message": "An error occured inserting the set"}, 500
 
-    
-
-  # POST (create)
-  def post(self):
-    pass
 
 
   # DELETE
@@ -81,8 +102,8 @@ class AddSequence(Resource):
       # ...and it already has an associated sequence, return error message
       # if (set.sequence_id):
       if (set.allocated):
-        # return {'message': 'This set is already allocated'}, 400
-        return set.json()
+        return {'message': 'This set is already allocated'}, 400
+        # return set.json()
       # Otherwise create new sequence
       
       SetModel.create_new_sequence(set_id, set, data)

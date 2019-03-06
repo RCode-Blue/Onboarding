@@ -15,8 +15,8 @@ class Template(Resource):
     template = TemplateModel.find_by_id(data['template_id'])
     if template:
       return template.json_positions()
-
-    return {'message:' 'Template not found'}, 404
+    
+    return {"message": "Template not found"}, 404
 
 
   # PUT (edit)

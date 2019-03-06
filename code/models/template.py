@@ -13,6 +13,8 @@ class TemplateModel(db.Model):
   
   positions = db.relationship('PositionModel', back_populates = 'template')
 
+  # _set = db.relationship('SetModel')
+
   # sequences = db.relationship('SequenceModel')
 
   def __init__(self, template_name, description):
@@ -24,7 +26,8 @@ class TemplateModel(db.Model):
   def json(self):
     return{'id': self.id,
            'template_name': self.template_name, 
-           'description': self.description
+           'description': self.description#,
+          #  'set_id': self._set.id
     }
 
 

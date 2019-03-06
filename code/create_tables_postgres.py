@@ -97,7 +97,7 @@ create_table += "start_date VARCHAR, "
 create_table += "employee_id INTEGER, "
 create_table += "manager_id INTEGER, "
 create_table += "buddy_id INTEGER, "
-create_table += "allocated INTEGER)"
+create_table += "allocated BOOLEAN)"
 
 cursor.execute(create_table)
 #connection.commit()
@@ -718,7 +718,7 @@ cursor.execute(SQLExecute)
 
 SQLExecute = "INSERT INTO templates"
 SQLExecute += "(template_name, description) VALUES"
-SQLExecute += "('Jedi Training', 'How to destroy a Death Star')"
+SQLExecute += "('Jedi Training', 'Jedi Academy Curriculum')"
 cursor.execute(SQLExecute)
 #connection.commit()
 #endregion
@@ -728,19 +728,19 @@ cursor.execute(SQLExecute)
 #region
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, allocated) VALUES"
-SQLExecute += "(1, 'Sydney Onboarding for Tyler Holland', 'Sydney', '01-02-2019', 12, 1, 14, 1)"
+SQLExecute += "(1, 'Sydney Onboarding for Tyler Holland', 'Sydney', '01-02-2019', 12, 1, 14, TRUE)"
 cursor.execute(SQLExecute)
 #connection.commit()
 
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, allocated) VALUES"
-SQLExecute += "(1, 'Sydney Onboarding for Patrick Gilchrist', 'Sydney', '02-03-2019', 13, 2, 14, 1)"
+SQLExecute += "(1, 'Sydney Onboarding for Patrick Gilchrist', 'Sydney', '02-03-2019', 13, 2, 14, TRUE)"
 cursor.execute(SQLExecute)
 #connection.commit()
 
 SQLExecute = "INSERT INTO sets"
 SQLExecute += "(template_id, description, city, start_date, employee_id, manager_id, buddy_id, allocated) VALUES"
-SQLExecute += "(5, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26, NULL)"
+SQLExecute += "(5, 'Ring-bearer quest for Bilbo Baggins', 'Middle-Earth', '21-01-2019', 24, 22, 26, FALSE)"
 cursor.execute(SQLExecute)
 #connection.commit()
 

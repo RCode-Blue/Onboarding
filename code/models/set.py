@@ -18,7 +18,7 @@ class SetModel(db.Model):
   buddy_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   allocated = db.Column(db.Boolean)
 
-  template = db.relationship('TemplateModel')
+  template = db.relationship('TemplateModel', backref='_set')
   sequence = db.relationship('SequenceModel', backref='_set', lazy=True)
 
   # sequence = db.relationship('SequenceModel', back_populates = '_set')
@@ -104,6 +104,7 @@ class SetModel(db.Model):
   @classmethod
   def create_new_sequence(cls, set_id, set, data):
     set.allocated = True
+    # set.allocated = 1
     set.save_to_db()
     
     for position in set.template.positions:
