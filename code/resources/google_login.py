@@ -1,6 +1,9 @@
-from flask import g, request, url_for, jsonify
+from flask import g, request, url_for, jsonify, session
 from flask_restful import Resource
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import (
+  create_access_token, 
+  create_refresh_token,
+  get_jwt_identity)
 
 from oa import google
 from models.user import UserModel
@@ -49,9 +52,11 @@ class GoogleAuthorize(Resource):
       newUser.save_to_db()
       time.sleep(5.5)
       #TODO: implement "try again" code for the above, perhaps using Tenacity
-
+    
     access_token = create_access_token(identity = user.id, fresh = True)
     refresh_token = create_refresh_token(user.id)
+    # print('-----------------------')
+    # print(user)
 
     return {
       "access_token": access_token, 
@@ -60,3 +65,9 @@ class GoogleAuthorize(Resource):
       "google_username": google_user.data['email'],
       "google_userid": google_user.data['id']
       }, 200
+
+
+class GoogleRefresh(Resource):
+  @classmethod
+  def get(cls):
+    current_user = get_jwt_identity()
