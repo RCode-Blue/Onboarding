@@ -82,9 +82,16 @@ class Set(Resource):
 
 
 class Sets(Resource):
+  parser = reqparse.RequestParser()
+  parser.add_argument('employee_id', type = int)
+  
   def get(self):
-    return {"sets": [set.json() for set in SetModel.query.all()]}
+    data = Sets.parser.parse_args()
+    sets = SetModel.find_by_user_id(data['employee_id'])
 
+    return { 'sets': [set.json() for set in sets] }
+
+    
 
 class AddSequence(Resource):
   parser = reqparse.RequestParser()

@@ -1,4 +1,4 @@
-from flask import g, request, url_for, jsonify, session
+from flask import g, request, url_for, jsonify, session, redirect
 from flask_restful import Resource
 from flask_jwt_extended import (
   create_access_token, 
@@ -30,6 +30,7 @@ class GoogleAuthorize(Resource):
     g.access_token = resp['access_token']
     google_user = google.get('userinfo')
     google_email = google_user.data['email']
+    # print(google_user)
 
     #region
     # user = UserModel.find_by_email(google_email)
@@ -55,19 +56,43 @@ class GoogleAuthorize(Resource):
     
     access_token = create_access_token(identity = user.id, fresh = True)
     refresh_token = create_refresh_token(user.id)
-    # print('-----------------------')
-    # print(user)
 
-    return {
-      "access_token": access_token, 
-      "refresh_token": refresh_token,
-      "user_id": user.id,
-      "google_username": google_user.data['email'],
-      "google_userid": google_user.data['id']
-      }, 200
+    session['user_id'] = user.id
+    session.permanent = True
+
+    # return {
+    #   # "access_token": access_token, 
+    #   # "refresh_token": refresh_token,
+    #   "user_id": user.id,
+    #   # "google_username": google_user.data['email'],
+    #   "google_userid": google_user.data['id']
+    #   }, 200
+
+    return redirect(
+      # "http://localhost:3000/dashboard"
+      "http://localhost:3000/"
+    )
 
 
-class GoogleRefresh(Resource):
+class GoogleLogout(Resource):
   @classmethod
   def get(cls):
-    current_user = get_jwt_identity()
+    session.pop('user_id', None)
+    session.modified = True
+    return redirect(
+      "http://localhost:3000"
+    )
+
+
+class GetCurrentUser(Resource):
+  @classmethod
+  def get(cls):
+    if 'user_id' in session:
+      if session['user_id']:
+        return{
+          "user_id": session['user_id']
+        }
+    return ''
+    
+
+

@@ -124,10 +124,13 @@ class SetModel(db.Model):
       # return newSeq.json(), 201
 
 
-
   @classmethod
   def find_by_id(cls, _id):
     return cls.query.filter_by(id = _id).first()
+
+  @classmethod
+  def find_by_user_id(cls, user_id):
+    return cls.query.filter_by(employee_id = user_id)
 
   @classmethod
   def find_by_sequence_id(cls, _id):

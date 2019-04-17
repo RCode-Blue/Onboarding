@@ -1,2 +1,5 @@
 venv
 config.py
+oa.py
+.env
+.pyc
