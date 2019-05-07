@@ -37,8 +37,8 @@ jwt = JWTManager(app)
 api.add_resource(Users, '/api/users')
 api.add_resource(User, '/api/user/<string:userid>')
 
-api.add_resource(Tasks, '/tasks')
-api.add_resource(Task,  '/task')
+api.add_resource(Tasks, '/api/tasks')
+api.add_resource(Task,  '/api/task')
 
 api.add_resource(Positions, '/positions')
 api.add_resource(Position,  '/position')
