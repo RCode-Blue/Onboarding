@@ -88,7 +88,7 @@ class Sets(Resource):
   def get(self):
     data = Sets.parser.parse_args()
     sets = SetModel.find_by_user_id(data['employee_id'])
-
+    
     return { 'sets': [set.json() for set in sets] }
 
     
