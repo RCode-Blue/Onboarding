@@ -21,8 +21,9 @@ Current onboarding processes for new employees were done on paper. This presents
 
 ***
 <h2>How to Use</h2>
-Click login on the front page:
-![Login](/assets/img/Front.png)
+<p>Click "Login with Google" on the front page:</p>
+<img src = "https://raw.githubusercontent.com/RCode-Blue/Onboarding/master/assets/img/Front.png">
+
 
 
 ***
