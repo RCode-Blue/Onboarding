@@ -20,11 +20,18 @@ Current onboarding processes for new employees were done on paper. This presents
 </ul>
 
 ***
-<h2>How to Use</h2>
-<p>Click "Login with Google" on the front page:</p>
+<h2>Screenshots</h2>
+<p>Login Page:</p>
 <img src = "https://raw.githubusercontent.com/RCode-Blue/Onboarding/master/assets/img/Front.png">
 
+<p>Logged In:</p>
+<img src = "https://raw.githubusercontent.com/RCode-Blue/Onboarding/master/assets/img/LoggedIn.png">
 
+<p>Task List</p>
+<img src = "https://raw.githubusercontent.com/RCode-Blue/Onboarding/master/assets/img/TasksList.png">
+
+<p>Editing a Task</p>
+<img src = "https://raw.githubusercontent.com/RCode-Blue/Onboarding/master/assets/img/EditATask.png">
 
 ***
 <h2>Back End Details</h2>
