@@ -20,6 +20,12 @@ Current onboarding processes for new employees were done on paper. This presents
 </ul>
 
 ***
+<h2>How to Use</h2>
+Click login on the front page:
+![Login](/assets/img/Front.png)
+
+
+***
 <h2>Back End Details</h2>
 <ul>
 <li>Language: Python</li>
@@ -33,28 +39,64 @@ Current onboarding processes for new employees were done on paper. This presents
 
 <h2>Installation</h2>
 <h4>Download</h4>
-<code>
-https://github.com/RCode-Blue/Onboarding.git
-cd Onboarding
-</code>
+
+- Browse to: https://github.com/RCode-Blue/Onboarding.git
+- cd Onboarding
+
 
 <h4>Setup and start virtual environment</h4>
-<code>
-sudo pip install virtualenv
-virtualenv venv --python=python3.7
-source venv/bin/activate
-pip install -r requirements.txt
-</code>
+
+    sudo pip install virtualenv
+    virtualenv venv --python=python3.7
+    source venv/bin/activate
+    pip install -r requirements.txt
+
 
 
 <h4>To setup seed data:</h4>
-<code>
-python create_tables_postgres.py
-</code>
+
+    python create_tables_postgres.py
+
+
+<h4>To setup Google authentication:</h4>
+
+- Browse to the [Google API console](https://console.developers.google.com) 
+- Rename oa_sample.py to oa.py
+- Put your keys in the appropriate locations
 
 
 <h4>To run:</h4>
-<code>
-python app.py
-</code>
+
+    python app.py
+
+
+***
+
+<h2>Architecture Overview</h2>
+<h3>Models</h3>
+The back end consists of the following models:
+
+| Name     | Description                                                                                                                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| task     | An individual task                                                                                                                                                                                     |
+| template | A template of task sequences                                                                                                                                                                           |
+| position | A table of task / template combinations                                                                                                                                                                |
+| user     | A list of logged-in users                                                                                                                                                                              |
+| set      | Links a template to a user                                                                                                                                                                             |
+| sequence | A list of tasks assigned to a user.                                                                                                                                                                    |
+|          | When a user is assigned to a template, the template, task and user information are obtained and new rows are created. When a user ticks a task as complete, this is the table that they are working on |
+
+
+<h3> Key API Endpoints</h3>
+
+| Path                       | Description                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------- |
+| /api/user/<string:userid>  | Returns a user given an id                                                         |
+| /api/template              | Returns a template, given an id                                                    |
+| /api/task                  | Returns a task given an id                                                         |
+| /api/tasklist/<int:set_id> | Returns a user's onboarding tasks given a set id                                   |
+| /addsequence/<int:set_id>  | Creates a list of onboarding tasks specific      to a selected user given a set id |
+
+
+
 
