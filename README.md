@@ -34,13 +34,13 @@ Current onboarding processes for new employees were done on paper. This presents
 <img src = "https://raw.githubusercontent.com/RCode-Blue/Onboarding/master/assets/img/EditATask.png">
 
 ***
-<h2>Back End Details</h2>
+<h2>Built using</h2>
 <ul>
-<li>Language: Python</li>
-<li>Framework: Flask</li>
-<li>Authentication: Flask-OAuthlib</li>
-<li>Database adapter: psycopg2</li>
-<li>Object-Relational mapper: SQLAlchemy, Flask-SQLAlchemy</li>
+<li>Python</li>
+<li>Flask</li>
+<li>Flask-OAuthlib</li>
+<li>psycopg2</li>
+<li>SQLAlchemy, Flask-SQLAlchemy</li>
 </ul>
 
 ***
