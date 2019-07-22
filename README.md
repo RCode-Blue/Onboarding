@@ -19,11 +19,6 @@ Current onboarding processes for new employees were done on paper. This presents
 <li>Instructors and employee are able to mark a task as complete</li>
 </ul>
 
-***
-<h2>How to Use</h2>
-Click login on the front page:
-![Login](/assets/img/Front.png)
-
 
 ***
 <h2>Back End Details</h2>
