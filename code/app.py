@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 from datetime import timedelta
 
 from resources.task import Task, Tasks
-from resources.sequence import Sequence, Sequences, TaskList
+from resources.sequence import Sequence, Sequences, TaskList, UserTask
 from resources.position import Position, Positions
 from resources.user import User, Users
 from resources.template import Template, Templates
@@ -14,10 +14,10 @@ from resources.set import Set, Sets, AddSequence
 
 from dotenv import load_dotenv
 from resources.google_login import (
-  GoogleLogin, 
-  GoogleAuthorize, 
-  GoogleLogout, 
-  GetCurrentUser)
+    GoogleLogin,
+    GoogleAuthorize,
+    GoogleLogout,
+    GetCurrentUser)
 
 
 from config import DefaultConfig
@@ -53,16 +53,17 @@ api.add_resource(AddSequence, '/addsequence/<int:set_id>')
 api.add_resource(Sequences, '/api/sequences')
 api.add_resource(Sequence,  '/api/sequence/<int:_id>')
 api.add_resource(TaskList, '/api/tasklist/<int:set_id>')
+api.add_resource(UserTask, '/api/usertask')
 
 api.add_resource(GoogleLogin, "/login/google")
-api.add_resource(GoogleAuthorize, "/login/google/authorized", endpoint = "google.authorize")
+api.add_resource(GoogleAuthorize, "/login/google/authorized",
+                 endpoint="google.authorize")
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
 
 
 # Main
 if __name__ == '__main__':
-  from db import db
-  db.init_app(app)
-  app.run(port = 5000, debug = True)
-
+    from db import db
+    db.init_app(app)
+    app.run(port=5000, debug=True)
