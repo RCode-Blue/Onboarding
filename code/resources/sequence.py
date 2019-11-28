@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from models.sequence import SequenceModel
 from models.set import SetModel
-from datetime import datetime
+import datetime
 
 from db import db
 
@@ -30,7 +30,6 @@ class Sequence(Resource):
         sequence = SequenceModel.find_by_id(_id)
         if sequence:
             # return sequence.json()
-            # print(sequence)
             return sequence.json_positions()
         return {'message': 'Task not found'}, 404
 
@@ -56,7 +55,7 @@ class Sequence(Resource):
                 data['task_notes'])
 
         sequence.save_to_db()
-        # return sequence.json()
+        return {sequence: sequence.json()}
 
     # DELETE
     def delete(self, _id):
@@ -86,7 +85,6 @@ class TaskList(Resource):
                 user_tasks.append(task.json())
             sorted_user_tasks = sorted(
                 user_tasks, key=lambda x: x["task_position"])
-            # print(sorted_user_tasks)
             return {
                 "set": _set.json(),
                 # 'tasks': [task.json() for task in tasks]}
@@ -103,7 +101,10 @@ class UserTask(Resource):
     parser.add_argument("task_description", type=str)
     parser.add_argument("task_position", type=int)
     parser.add_argument("completed", type=bool)
-    parser.add_argument("completion_date", type=datetime)
+    # parser.add_argument("completion_date", type=str)
+    parser.add_argument("completion_date_year", type=int)
+    parser.add_argument("completion_date_month", type=int)
+    parser.add_argument("completion_date_date", type=int)
     parser.add_argument("checked_off_by", type=int)
     parser.add_argument("instructor_id", type=str)
     parser.add_argument("task_notes", type=str)
@@ -114,7 +115,6 @@ class UserTask(Resource):
         usertask = SequenceModel.find_by_id(data['user_task_id'])
 
         if usertask:
-            # print(usertask)
             return {
                 "user_task": usertask.json()
             }
@@ -125,11 +125,20 @@ class UserTask(Resource):
     def put(self):
         data = UserTask.parser.parse_args()
         user_task = SequenceModel.find_by_id(data["user_task_id"])
-        # print("----------------")
+
         # print(data)
 
         if user_task:
+            if data["completed"] == True:
+                formatted_completion_date = datetime.date(
+                    data["completion_date_year"], data["completion_date_month"], data["completion_date_date"])
+
+            # elif data["completed"] == False:
+            else:
+                formatted_completion_date = None
+
             user_task.completed = data["completed"]
+            user_task.completion_date = formatted_completion_date
             try:
                 user_task.save_to_db()
 

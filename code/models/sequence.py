@@ -1,5 +1,7 @@
-import sqlite3
+# import sqlite3
 from db import db
+import json
+import datetime
 # from models.set import SetModel
 
 # Classes
@@ -14,7 +16,7 @@ class SequenceModel(db.Model):
     task_description = db.Column(db.Text)
     task_position = db.Column(db.Integer)
     completed = db.Column(db.Boolean)
-    completion_date = db.Column(db.Text)
+    completion_date = db.Column(db.DateTime)
     checked_off_by = db.Column(db.Integer, db.ForeignKey("users.id"))
     instructor_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     task_notes = db.Column(db.Text)
@@ -47,12 +49,17 @@ class SequenceModel(db.Model):
         self.task_notes = task_notes
 
     def json(self):
+        if isinstance(self.completion_date, datetime.date):
+            converted_date = self.completion_date.__str__()
+        else:
+            converted_date = None
+
         return {"id": self.id,
                 "set_id": self.set_id,
                 "task_description": self.task_description,
                 "task_position": self.task_position,
                 "completed": self.completed,
-                "completion_date": self.completion_date,
+                "completion_date": converted_date,
                 "instructor_id": self.instructor_id,
                 "task_notes": self.task_notes
                 }

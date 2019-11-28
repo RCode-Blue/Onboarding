@@ -21,6 +21,12 @@ class PositionModel(db.Model):
     self.task_id = task_id
     self.position_no = position_no
 
+  # def __init__(self, **kwargs):
+  #   super().__init__(**kwargs)
+
+
+
+
 
   def json(self):
     return {'position_id': self.id,

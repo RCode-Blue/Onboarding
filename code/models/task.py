@@ -57,6 +57,24 @@ class TaskModel(db.Model):
             task_description=description,
             instructor_id=instructor_id).first()
 
+    @classmethod
+    def find_unallocated_tasks(cls, task_ids):
+        # print(type(task_ids))
+        # return cls.query.filter_by(id=_id).one() for _id in task_ids
+        # for _id in task_ids:
+        #     print(_id)
+
+        # print(cls)
+        # print(task_ids)
+        return cls.query.filter_by(
+            (id == _id).all() for _id in task_ids)
+        # return cls.query.filter_by(id=task_ids)
+        # print("xxxxxxx-xxxxx")
+        # for _id in task_ids:
+        # return cls.query.filter_by(id=_id)
+        # thisTask = cls.query.filter_by(id=_id)
+        # print(thisTask)
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

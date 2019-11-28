@@ -1,6 +1,9 @@
 from flask_restful import Resource, reqparse
 from models.set import SetModel
 from models.sequence import SequenceModel
+from models.template import TemplateModel
+
+import datetime
 
 
 class Set(Resource):
@@ -9,13 +12,16 @@ class Set(Resource):
     parser.add_argument('template_id', type=int)
     parser.add_argument('description', type=str)
     parser.add_argument('city', type=str)
-    parser.add_argument('start_date', type=str)
+    parser.add_argument('start_date_year', type=str)
+    parser.add_argument('start_date_month', type=str)
+    parser.add_argument('start_date_date', type=str)
     parser.add_argument('employee_id', type=int)
     parser.add_argument('manager_id', type=int)
     parser.add_argument('buddy_id', type=int)
     parser.add_argument('sequence_id', type=int)
 
     # GET(id)
+
     def get(self):
         data = Set.parser.parse_args()
         _set = SetModel.find_by_id(data['_id'])
@@ -27,22 +33,38 @@ class Set(Resource):
     # POST (create)
     def post(self):
         data = Set.parser.parse_args()
-        _set = SetModel.find_by_set(data['template_id'], data['employee_id'])
+        # print("------------- $$$ -----------------")
+        # print(data)
+
+        # print((data["start_date_year"]))
+        # print(type(data["start_date_year"]))
+        # print((data["start_date_month"]))
+        # print(type(data["start_date_month"]))
+        # print((data["start_date_date"]))
+        # print(type(data["start_date_date"]))
+
+        formatted_start_date = datetime.date(
+            int(data["start_date_year"]), int(data["start_date_month"]), int(data["start_date_date"]))
+
+        _set = SetModel.find_by_set(
+            templateid=data['template_id'], employeeid=data['employee_id'])
+        # _set = SetModel.find_by_user_id(data['employee_id'])
         if _set:
-            return {"message": "This employee has already been allocated a set"}
-        newSet = SetModel(
+            return {"message": "This employee has already been allocated this template"}
+
+        new_set = SetModel(
             data['template_id'],
             data['description'],
             data['city'],
-            data['start_date'],
+            formatted_start_date,
             data['employee_id'],
             data['manager_id'],
             data['buddy_id']
         )
 
         try:
-            newSet.save_to_db()
-            return newSet.json()
+            new_set.save_to_db()
+            return {"newSet": new_set.json()}
         except:
             return {"message": "An error occured creating the set"}, 500
 
@@ -92,6 +114,7 @@ class AddSequence(Resource):
 
         # Get the Set
         set = SetModel.find_by_id(set_id)
+        # print(set.json())
         # If set exists...
         if set:
             # ...and it already has an associated sequence, return error message
@@ -99,12 +122,13 @@ class AddSequence(Resource):
             if (set.allocated):
                 return {'message': 'This set is already allocated'}, 400
                 # return set.json()
-            # Otherwise create new sequence
-
+            # Otherwise create new sequence\
             SetModel.create_new_sequence(set_id, set, data)
-            return set.json()
+            # return {set: set.json()}
 
         else:
-            return {'error': 'The Set does not exist'}, 400
+            return {'error': 'The Set does not exist'}, 404
 
+        assigned_template = TemplateModel.find_by_id(set.template_id)
+        return{"assigned_tempplate": assigned_template.json()}
         # return set.json()

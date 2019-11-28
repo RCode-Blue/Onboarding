@@ -4,6 +4,7 @@ from db import db
 from models.sequence import SequenceModel
 from models.user import UserModel
 
+
 # Classes
 
 
@@ -14,7 +15,7 @@ class SetModel(db.Model):
     template_id = db.Column(db.Integer, db.ForeignKey('templates.id'))
     description = db.Column(db.Text)
     city = db.Column(db.Text)
-    start_date = db.Column(db.Text)
+    start_date = db.Column(db.DateTime)
     employee_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     manager_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     buddy_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -54,7 +55,7 @@ class SetModel(db.Model):
                 'template_id': self.template_id,
                 'description': self.description,
                 'city': self.city,
-                'start_date': self.start_date,
+                'start_date': self.start_date.__str__(),
                 'employee_id': self.employee_id,
                 'manager_id': self.manager_id,
                 'buddy_id': self.buddy_id,
@@ -66,7 +67,7 @@ class SetModel(db.Model):
                 'template_id': self.template_id,
                 'description': self.description,
                 'city': self.city,
-                'start_date': self.start_date,
+                'start_date': self.start_date.__str__(),
                 'employee_id': self.employee_id,
                 'manager_id': self.manager_id,
                 'buddy_id': self.buddy_id,
@@ -101,10 +102,6 @@ class SetModel(db.Model):
 
     @classmethod
     def create_new_sequence(cls, set_id, set, data):
-        set.allocated = True
-        # set.allocated = 1
-        set.save_to_db()
-
         for position in set.template.positions:
             newSeq = SequenceModel(set_id,
                                    position.task.task_description,
@@ -116,10 +113,12 @@ class SetModel(db.Model):
                                    position.task.task_notes)
             try:
                 newSeq.save_to_db()
+                pass
             except:
-                return {"message": "An error occured inserting this sequence"}, 500
+                return {"message": "An error occured inserting this sequence"},
 
-            # return newSeq.json(), 201
+            set.allocated = True
+            set.save_to_db()
 
     @classmethod
     def find_by_id(cls, _id):

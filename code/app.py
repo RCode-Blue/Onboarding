@@ -4,7 +4,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
 
-from resources.task import Task, Tasks
+from resources.task import Task, Tasks, UnallocatedTasks
 from resources.sequence import Sequence, Sequences, TaskList, UserTask
 from resources.position import Position, Positions
 from resources.user import User, Users
@@ -39,16 +39,17 @@ api.add_resource(User, '/api/user/<string:userid>')
 
 api.add_resource(Tasks, '/api/tasks')
 api.add_resource(Task,  '/api/task')
+api.add_resource(UnallocatedTasks, '/api/unallocatedtasks')
 
-api.add_resource(Positions, '/positions')
-api.add_resource(Position,  '/position')
+api.add_resource(Positions, '/api/positions')
+api.add_resource(Position,  '/api/position')
 
 api.add_resource(Templates, '/api/templates')
 api.add_resource(Template, '/api/template')
 
 api.add_resource(Sets, '/api/sets')
 api.add_resource(Set, '/api/set')
-api.add_resource(AddSequence, '/addsequence/<int:set_id>')
+api.add_resource(AddSequence, '/api/addsequence/<int:set_id>')
 
 api.add_resource(Sequences, '/api/sequences')
 api.add_resource(Sequence,  '/api/sequence/<int:_id>')

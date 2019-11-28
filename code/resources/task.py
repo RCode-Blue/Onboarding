@@ -36,35 +36,30 @@ class Task(Resource):
     def post(self):
         data = Task.parser.parse_args()
 
-        print("--------------")
-        print(data["task_description"])
-        print(data["instructor_id"])
-        print("--------------")
-
         task = TaskModel.find_by_description_and_instructor(
             data['task_description'], data['instructor_id'])
         if task:
-            # return {"error": "The task already exists"}, 500
-            return task.json(), 201
-        # else:
-        #     newTask = TaskModel(
-        #         data['task_name'],
-        #         data['task_description'],
-        #         data['instructor_id'],
-        #         data['task_notes'])
+            return {"error": "The task already exists"}, 500
+            # return task.json(), 201
+        else:
+            newTask = TaskModel(
+                data['task_name'],
+                data['task_description'],
+                data['instructor_id'],
+                data['task_notes'])
 
-        # try:
-        #     newTask.save_to_db()
-        # except:
-        #     return {"message": "An error occurred inserting the task"}, 500
+        try:
+            newTask.save_to_db()
+        except:
+            return {"message": "An error occurred inserting the task"}, 500
 
-        # return newTask.json(), 201
+        return {"task": newTask.json()}, 201
 
     # PUT (edit) (task_name)
     def put(self):
         data = Task.parser.parse_args()
-        # print("-----------")
-        # print(data)
+        print("-----------")
+        print(data)
         task = TaskModel.find_by_id(
             data["task_id"]
         )
@@ -77,14 +72,14 @@ class Task(Resource):
             task.task_notes = data["task_notes"]
 
             task.save_to_db()
-            print(task.json())
+            # print(task.json())
             return {
                 "_task": task.json()
-            }
+            }, 201
 
         # If task doesn't exist, error out
         else:
-            return {"message": "Task does not exist"}, 400
+            return {"message": "Task does not exist"}, 404
 
     # DELETE (task_id)
     def delete(self):
@@ -94,9 +89,30 @@ class Task(Resource):
             task.delete_from_db()
             return {"message": "Task deleted"}
 
-        return {"message": "Task not found"}, 400
+        return {"message": "Task not found"}, 404
 
 
 class Tasks(Resource):
     def get(self):
         return {"tasks": [task.json() for task in TaskModel.query.all()]}
+
+
+class UnallocatedTasks(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('allocated_task_ids')
+
+    def get(self):
+        # print("-----------------------")
+        data = UnallocatedTasks.parser.parse_args()
+        id_list = list(map(int, (data["allocated_task_ids"].split(","))))
+
+        all_tasks = {"all_tasks": [task.json()
+                                   for task in TaskModel.query.all()]}
+
+        unallocated_tasks = []
+
+        for i in range(len(all_tasks["all_tasks"])):
+            if all_tasks["all_tasks"][i]["id"] not in id_list:
+                unallocated_tasks.append(all_tasks["all_tasks"][i])
+
+        return{"unallocated_tasks": unallocated_tasks}
