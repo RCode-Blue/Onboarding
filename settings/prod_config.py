@@ -9,8 +9,7 @@ db_user = os.environ.get("DB_USER")
 db_password = os.environ.get("DB_PASSWORD")
 db_database = os.environ.get("DB_DATABASE")
 db_host = os.environ.get("DB_HOST")
-# db_port = os.environ.get("DB_PORT")
-db_port = process.env.PORT
+db_port = os.environ.get("DB_PORT")
 db_uri = os.environ.get("DATABASE_URL")
 
 oauth = OAuth()
