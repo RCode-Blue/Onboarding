@@ -52,31 +52,40 @@ Current onboarding processes for new employees were done on paper. This presents
 - cd Onboarding
 
 
-<h4>Setup and start virtual environment</h4>
+<h4>Setup virtual environment</h4>
 
-    sudo pip install virtualenv
-    virtualenv venv --python=python3.7
-    source venv/bin/activate
-    pip install -r requirements.txt
+<code>
+pip install --user virtualenv<br />
+virtualenv venv --python=python3.7
+</code>
 
 
+<br />
+<h4>Start virtual environment</h4>
 
+<code>
+source venv/bin/activate <br />
+pip install -r requirements.txt
+</code>
+
+<br />
 <h4>To setup seed data:</h4>
 
-    python create_tables_postgres.py
+<code>python create_tables_postgres.py</code>
 
-
+<br />
 <h4>To setup Google authentication:</h4>
 
 - Browse to the [Google API console](https://console.developers.google.com) 
 - Rename oa_sample.py to oa.py
 - Put your keys in the appropriate locations
 
-
-<h4>To run:</h4>
-
+<br />
+<h4>To run, type the following:</h4>
+<code>
+    export FLASK_ENV=development<br /></br />
     python app.py
-
+</code>
 
 ***
 

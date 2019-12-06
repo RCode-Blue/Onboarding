@@ -1,5 +1,14 @@
+__pycache__
 venv
 config.py
 oa.py
 .env
 .pyc
+.vscode
+ls
+dev_config.py
+test_config.py
+onboarding_dump
+.old
+delete_tables_postgres.py
+oa_sample.py
