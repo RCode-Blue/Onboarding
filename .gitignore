@@ -1,6 +1,5 @@
 __pycache__
 venv
-config.py
 oa.py
 .env
 .pyc
