@@ -12,6 +12,7 @@ db_host = os.environ.get("DB_HOST")
 db_port = os.environ.get("DB_PORT")
 db_uri = os.environ.get("DATABASE_URL")
 
+
 oauth = OAuth()
 
 
