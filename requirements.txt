@@ -18,6 +18,7 @@ Flask-Migrate==2.4.0
 Flask-OAuthlib==0.9.5
 Flask-RESTful==0.3.7
 Flask-SQLAlchemy==2.3.2
+gunicorn==20.0.4
 idna==2.8
 isort==4.3.10
 itsdangerous==1.1.0
