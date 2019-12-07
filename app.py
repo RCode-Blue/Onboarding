@@ -73,6 +73,13 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Endpoints
+app.route("/")
+
+
+def index():
+    return "<h1>Onboarding</h1>"
+
+
 api.add_resource(Users, "/api/users")
 api.add_resource(User, "/api/user/<string:userid>")
 
