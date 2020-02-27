@@ -69,6 +69,8 @@ def get_google_token():
 #     },
 # }
 
+ALLOWED_HOSTS = ["*"]
+
 
 class ProdConfig:
     POSTGRES = {
