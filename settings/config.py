@@ -1,5 +1,10 @@
 import os
 
+# if os.environ["FLASK_ENV"] == "dev":
+#     from .dev_config import *
+# if os.environ["FLASK_ENV"] == "prod":
+#     from .prod_config import *
+
 
 class DefaultConfig:
     SECRET_KEY = os.urandom(24)

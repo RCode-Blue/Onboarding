@@ -20,9 +20,9 @@ from settings.config import DefaultConfig
 # from settings.dev_config import DevConfig
 
 # from config import DefaultConfig
-print("<<<<< <<<< <<< << < --- > >> >>> >>>> >>>>>")
-# print("Enviroment: " + os.environ["FLASK_ENV"])
+print("<<<<< <<<< <<< << <! --- !> >> >>> >>>> >>>>>")
 print("EnviromenT: " + os.environ.get("FLASK_ENV"))
+# print(SQLALCHEMY_DATABASE_URI)
 # environment = os.environ.get("FLASK_ENV")
 
 environment = os.environ.get("FLASK_ENV")
@@ -73,13 +73,6 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Endpoints
-app.route("/")
-
-
-def index():
-    return "<h1>Onboarding</h1>"
-
-
 api.add_resource(Users, "/api/users")
 api.add_resource(User, "/api/user/<string:userid>")
 

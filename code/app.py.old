@@ -20,9 +20,9 @@ from settings.config import DefaultConfig
 # from settings.dev_config import DevConfig
 
 # from config import DefaultConfig
-print("<<<<< <<<< <<< << < --- > >> >>> >>>> >>>>>")
+# print("<<<<< <<<< <<< << < --- > >> >>> >>>> >>>>>")
 # print("Enviroment: " + os.environ["FLASK_ENV"])
-print("Enviroment: " + os.environ.get("FLASK_ENV"))
+# print("Enviroment: " + os.environ.get("FLASK_ENV"))
 # environment = os.environ.get("FLASK_ENV")
 
 environment = os.environ.get("FLASK_ENV")
