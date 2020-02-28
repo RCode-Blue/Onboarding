@@ -34,7 +34,10 @@ if environment == "production":
 class GoogleLogin(Resource):
     @classmethod
     def get(cls):
-        return google.authorize(url_for("google.authorize", _external=True))
+        # return google.authorize(url_for("google.authorize", _external=True))
+        return google.authorize(
+            "https://onb0ardingapp.azurewebsites.net/login/google/authorized"
+        )
 
 
 class GoogleAuthorize(Resource):
