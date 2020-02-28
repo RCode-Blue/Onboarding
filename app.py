@@ -76,6 +76,7 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Endpoints
+# region
 api.add_resource(Users, "/api/users")
 api.add_resource(User, "/api/user/<string:userid>")
 
@@ -102,8 +103,57 @@ api.add_resource(GoogleLogin, "/login/google")
 api.add_resource(
     GoogleAuthorize, "/login/google/authorized", endpoint="google.authorize"
 )
+
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
+# endregion
+
+# region
+# api.add_resource(Users, "https://onb0ardingapp.azurewebsites.net/api/users")
+# api.add_resource(
+#     User, "https://onb0ardingapp.azurewebsites.net/api/user/<string:userid>"
+# )
+
+# api.add_resource(Tasks, "https://onb0ardingapp.azurewebsites.net/api/tasks")
+# api.add_resource(Task, "https://onb0ardingapp.azurewebsites.net/api/task")
+# api.add_resource(
+#     UnallocatedTasks, "https://onb0ardingapp.azurewebsites.net/api/unallocatedtasks"
+# )
+
+# api.add_resource(Positions, "https://onb0ardingapp.azurewebsites.net/api/positions")
+# api.add_resource(Position, "https://onb0ardingapp.azurewebsites.net/api/position")
+
+# api.add_resource(Templates, "https://onb0ardingapp.azurewebsites.net/api/templates")
+# api.add_resource(Template, "https://onb0ardingapp.azurewebsites.net/api/template")
+
+# api.add_resource(Sets, "https://onb0ardingapp.azurewebsites.net/api/sets")
+# api.add_resource(Set, "https://onb0ardingapp.azurewebsites.net/api/set")
+# api.add_resource(
+#     AddSequence, "https://onb0ardingapp.azurewebsites.net/api/addsequence/<int:set_id>"
+# )
+
+# api.add_resource(Sequences, "https://onb0ardingapp.azurewebsites.net/api/sequences")
+# api.add_resource(
+#     Sequence, "https://onb0ardingapp.azurewebsites.net/api/sequence/<int:_id>"
+# )
+# api.add_resource(
+#     TaskList, "https://onb0ardingapp.azurewebsites.net/api/tasklist/<int:set_id>"
+# )
+# api.add_resource(UserTask, "https://onb0ardingapp.azurewebsites.net/api/usertask")
+
+# api.add_resource(GoogleLogin, "https://onb0ardingapp.azurewebsites.net/login/google")
+# api.add_resource(
+#     GoogleAuthorize,
+#     "https://onb0ardingapp.azurewebsites.net/login/google/authorized",
+#     endpoint="google.authorize",
+# )
+
+# api.add_resource(
+#     GetCurrentUser, "https://onb0ardingapp.azurewebsites.net/api/getcurrentuser"
+# )
+# api.add_resource(GoogleLogout, "https://onb0ardingapp.azurewebsites.net/api/logout")
+# endregion
+
 
 from db import db
 
