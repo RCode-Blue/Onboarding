@@ -101,9 +101,7 @@ api.add_resource(UserTask, "/api/usertask")
 
 api.add_resource(GoogleLogin, "/login/google")
 api.add_resource(
-    GoogleAuthorize,
-    "https://onb0ardingapp.azurewebsites.net/login/google/authorized",
-    endpoint="google.authorize",
+    GoogleAuthorize, "/login/google/authorized", endpoint="google.authorize",
 )
 
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
