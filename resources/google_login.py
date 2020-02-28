@@ -92,8 +92,8 @@ class GoogleAuthorize(Resource):
 
         return redirect(
             # "http://localhost:3000/dashboard"
-            # "http://localhost:3000/"
-            "https://onb0ardingapp.azurewebsites.net"
+            "http://localhost:3000/"
+            # "https://onb0ardingapp.azurewebsites.net"
         )
 
 
@@ -102,8 +102,8 @@ class GoogleLogout(Resource):
     def get(cls):
         session.pop("user_id", None)
         session.modified = True
-        # return redirect("http://localhost:3000")
-        return redirect("https://onb0ardingapp.azurewebsites.net")
+        return redirect("http://localhost:3000")
+        # return redirect("https://onb0ardingapp.azurewebsites.net")
 
 
 class GetCurrentUser(Resource):
