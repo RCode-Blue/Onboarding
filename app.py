@@ -105,10 +105,13 @@ api.add_resource(
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
 
+from db import db
+
+db.init_app(app)
 
 # Main
 if __name__ == "__main__":
-    from db import db
+    # from db import db
 
-    db.init_app(app)
+    # db.init_app(app)
     app.run(port=5000, debug=True)
