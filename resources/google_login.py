@@ -92,7 +92,8 @@ class GoogleAuthorize(Resource):
 
         return redirect(
             # "http://localhost:3000/dashboard"
-            "http://localhost:3000/"
+            # "http://localhost:3000/"
+            "https://onb0ardingapp.azurewebsites.net"
         )
 
 
