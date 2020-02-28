@@ -102,7 +102,8 @@ class GoogleLogout(Resource):
     def get(cls):
         session.pop("user_id", None)
         session.modified = True
-        return redirect("http://localhost:3000")
+        # return redirect("http://localhost:3000")
+        return redirect("https://onb0ardingapp.azurewebsites.net")
 
 
 class GetCurrentUser(Resource):
