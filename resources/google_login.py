@@ -43,6 +43,7 @@ class GoogleLogin(Resource):
 class GoogleAuthorize(Resource):
     @classmethod
     def get(cls):
+        print("------googleAUthorize-----")
         resp = google.authorized_response()
         if resp is None or resp.get("access_token") is None:
             error_response = {
