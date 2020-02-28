@@ -34,10 +34,11 @@ if environment == "production":
 class GoogleLogin(Resource):
     @classmethod
     def get(cls):
-        # return google.authorize(url_for("google.authorize", _external=True))
-        return google.authorize(
-            "https://onb0ardingapp.azurewebsites.net/login/google/authorized"
-        )
+        print(("<- -- --- GoogleLogin--- -- ->"))
+        return google.authorize(url_for("google.authorize", _external=True))
+        # return google.authorize(
+        #     "https://onb0ardingapp.azurewebsites.net/login/google/authorized"
+        # )
 
 
 class GoogleAuthorize(Resource):
@@ -96,23 +97,25 @@ class GoogleAuthorize(Resource):
 
         return redirect(
             # "http://localhost:3000/dashboard"
-            "http://localhost:3000/"
-            # "https://onb0ardingapp.azurewebsites.net"
+            # "http://localhost:3000/"
+            "https://lit-harbor-79520.herokuapp.com/"
         )
 
 
 class GoogleLogout(Resource):
     @classmethod
     def get(cls):
+        print("<< --- GoogleLogout --- >>")
         session.pop("user_id", None)
         session.modified = True
-        return redirect("http://localhost:3000")
-        # return redirect("https://onb0ardingapp.azurewebsites.net")
+        # return redirect("http://localhost:3000")
+        return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GetCurrentUser(Resource):
     @classmethod
     def get(cls):
+        print("|--- GetCurrentUser ---")
         print(session)
         if "user_id" in session:
             if session["user_id"]:

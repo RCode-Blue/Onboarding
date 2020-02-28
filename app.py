@@ -74,7 +74,6 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Endpoints
-# region
 api.add_resource(Users, "/api/users")
 api.add_resource(User, "/api/user/<string:userid>")
 
@@ -107,7 +106,6 @@ api.add_resource(
 
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
-# endregion
 
 
 from db import db
