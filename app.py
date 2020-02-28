@@ -4,7 +4,8 @@ import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
-from flask_cors import CORS
+
+# from flask_cors import CORS
 
 # from flask_env import MetaFlaskEnv
 from datetime import timedelta
@@ -28,7 +29,7 @@ print("EnviromenT: " + os.environ.get("FLASK_ENV"))
 
 environment = os.environ.get("FLASK_ENV")
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 
 if environment == "development":
