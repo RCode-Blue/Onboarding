@@ -6,22 +6,14 @@ from datetime import datetime
 class Task(Resource):
     # region
     parser = reqparse.RequestParser()
-    parser.add_argument('task_id',
-                        type=int)
-    parser.add_argument('task_name',
-                        type=str)
-    parser.add_argument('task_description',
-                        type=str)
-    parser.add_argument('completed',
-                        type=bool)
-    parser.add_argument('completion_date',
-                        type=str)
-    parser.add_argument('checked_off_by',
-                        type=int)
-    parser.add_argument('instructor_id',
-                        type=int)
-    parser.add_argument('task_notes',
-                        type=str)
+    parser.add_argument("task_id", type=int)
+    parser.add_argument("task_name", type=str)
+    parser.add_argument("task_description", type=str)
+    parser.add_argument("completed", type=bool)
+    parser.add_argument("completion_date", type=str)
+    parser.add_argument("checked_off_by", type=int)
+    parser.add_argument("instructor_id", type=int)
+    parser.add_argument("task_notes", type=str)
     # endregion
 
     # GET
@@ -37,16 +29,17 @@ class Task(Resource):
         data = Task.parser.parse_args()
 
         task = TaskModel.find_by_description_and_instructor(
-            data['task_description'], data['instructor_id'])
+            data["task_description"], data["instructor_id"]
+        )
         if task:
             return {"error": "The task already exists"}, 500
-            # return task.json(), 201
         else:
             newTask = TaskModel(
-                data['task_name'],
-                data['task_description'],
-                data['instructor_id'],
-                data['task_notes'])
+                data["task_name"],
+                data["task_description"],
+                data["instructor_id"],
+                data["task_notes"],
+            )
 
         try:
             newTask.save_to_db()
@@ -58,11 +51,7 @@ class Task(Resource):
     # PUT (edit) (task_name)
     def put(self):
         data = Task.parser.parse_args()
-        print("-----------")
-        print(data)
-        task = TaskModel.find_by_id(
-            data["task_id"]
-        )
+        task = TaskModel.find_by_id(data["task_id"])
 
         # If task exists, edit
         if task:
@@ -72,10 +61,7 @@ class Task(Resource):
             task.task_notes = data["task_notes"]
 
             task.save_to_db()
-            # print(task.json())
-            return {
-                "_task": task.json()
-            }, 201
+            return {"_task": task.json()}, 201
 
         # If task doesn't exist, error out
         else:
@@ -99,15 +85,13 @@ class Tasks(Resource):
 
 class UnallocatedTasks(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('allocated_task_ids')
+    parser.add_argument("allocated_task_ids")
 
     def get(self):
-        # print("-----------------------")
         data = UnallocatedTasks.parser.parse_args()
         id_list = list(map(int, (data["allocated_task_ids"].split(","))))
 
-        all_tasks = {"all_tasks": [task.json()
-                                   for task in TaskModel.query.all()]}
+        all_tasks = {"all_tasks": [task.json() for task in TaskModel.query.all()]}
 
         unallocated_tasks = []
 
@@ -115,4 +99,4 @@ class UnallocatedTasks(Resource):
             if all_tasks["all_tasks"][i]["id"] not in id_list:
                 unallocated_tasks.append(all_tasks["all_tasks"][i])
 
-        return{"unallocated_tasks": unallocated_tasks}
+        return {"unallocated_tasks": unallocated_tasks}

@@ -36,9 +36,6 @@ class GoogleLogin(Resource):
     def get(cls):
         print(("<- -- --- GoogleLogin--- -- ->"))
         return google.authorize(url_for("google.authorize", _external=True))
-        # return google.authorize(
-        #     "https://onb0ardingapp.azurewebsites.net/login/google/authorized"
-        # )
 
 
 class GoogleAuthorize(Resource):
@@ -46,6 +43,7 @@ class GoogleAuthorize(Resource):
     def get(cls):
         print("------googleAUthorize-----")
         resp = google.authorized_response()
+        # print(resp)
         if resp is None or resp.get("access_token") is None:
             error_response = {
                 "error": request.args["error"],
@@ -57,18 +55,7 @@ class GoogleAuthorize(Resource):
         google_user = google.get("userinfo")
         google_email = google_user.data["email"]
         # google_id = google.user.data['id']
-        # print(google_user)
-
-        # region
-        # user = UserModel.find_by_email(google_email)
-        # if not user:
-        #   newUser = UserModel(
-        #     google_email,
-        #     google_user.data['given_name'],
-        #     google_user.data['family_name']
-        #   )
-        #   newUser.save_to_db()
-        # endregion
+        print(google_user.data)
 
         user = UserModel.find_by_email(google_email)
         if not user:
@@ -87,36 +74,24 @@ class GoogleAuthorize(Resource):
         session["user_id"] = user.id
         session.permanent = True
 
-        # return {
-        #   # "access_token": access_token,
-        #   # "refresh_token": refresh_token,
-        #   "user_id": user.id,
-        #   # "google_username": google_user.data['email'],
-        #   "google_userid": google_user.data['id']
-        #   }, 200
-
-        return redirect(
-            # "http://localhost:3000/dashboard"
-            # "http://localhost:3000/"
-            "https://lit-harbor-79520.herokuapp.com/"
-        )
+        # return redirect("http://localhost:3000/")
+        return redirect("https://onb0ardingapp.azurewebsites.net/")
 
 
 class GoogleLogout(Resource):
     @classmethod
     def get(cls):
-        print("<< --- GoogleLogout --- >>")
+        print("<< -- --- GoogleLogout --- -- >>")
         session.pop("user_id", None)
         session.modified = True
         # return redirect("http://localhost:3000")
-        return redirect("https://lit-harbor-79520.herokuapp.com/")
+        return redirect("https://onb0ardingapp.azurewebsites.net")
 
 
 class GetCurrentUser(Resource):
     @classmethod
     def get(cls):
         print("|--- GetCurrentUser ---")
-        print(session)
         if "user_id" in session:
             if session["user_id"]:
                 return {"user_id": session["user_id"]}
