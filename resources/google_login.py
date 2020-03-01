@@ -75,7 +75,7 @@ class GoogleAuthorize(Resource):
         session.permanent = True
 
         # return redirect("http://localhost:3000/")
-        return redirect("https://onb0ardingapp.azurewebsites.net/")
+        return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GoogleLogout(Resource):
@@ -85,7 +85,7 @@ class GoogleLogout(Resource):
         session.pop("user_id", None)
         session.modified = True
         # return redirect("http://localhost:3000")
-        return redirect("https://onb0ardingapp.azurewebsites.net")
+        return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GetCurrentUser(Resource):

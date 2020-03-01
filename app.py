@@ -66,6 +66,7 @@ from resources.google_login import (
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+print("Starting app...")
 app.config.from_object(DefaultConfig)
 
 app.permanent_session_lifetime = timedelta(minutes=5)
@@ -74,6 +75,7 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Endpoints
+print("Loading endpoints...")
 api.add_resource(Users, "/api/users")
 api.add_resource(User, "/api/user/<string:userid>")
 
