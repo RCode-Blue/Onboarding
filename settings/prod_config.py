@@ -82,6 +82,7 @@ class ProdConfig:
     }
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    print("----- SECRET_KEY= " + SECRET_KEY)
 
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = db_uri
