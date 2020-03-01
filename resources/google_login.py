@@ -73,6 +73,8 @@ class GoogleAuthorize(Resource):
 
         session["user_id"] = user.id
         session.permanent = True
+        print("Session:")
+        print(session)
 
         # return redirect("http://localhost:3000/")
         return redirect("https://lit-harbor-79520.herokuapp.com/")
@@ -92,6 +94,8 @@ class GetCurrentUser(Resource):
     @classmethod
     def get(cls):
         print("|--- GetCurrentUser ---")
+        print("Session:")
+        print(session)
         if "user_id" in session:
             if session["user_id"]:
                 return {"user_id": session["user_id"]}
