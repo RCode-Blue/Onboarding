@@ -82,7 +82,7 @@ class ProdConfig:
     }
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
-    print("----- SECRET_KEY= " + SECRET_KEY)
+    JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
 
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = db_uri
