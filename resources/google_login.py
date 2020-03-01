@@ -73,7 +73,7 @@ class GoogleAuthorize(Resource):
 
         session["user_id"] = user.id
         session.permanent = True
-        print("Session:")
+        print("Google Authorize Session:")
         print(session)
 
         # return redirect("http://localhost:3000/")
@@ -94,7 +94,7 @@ class GetCurrentUser(Resource):
     @classmethod
     def get(cls):
         print("|--- GetCurrentUser ---")
-        print("Session:")
+        print("GetCurrentUser Session:")
         print(session)
         if "user_id" in session:
             if session["user_id"]:
