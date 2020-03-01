@@ -28,7 +28,7 @@ print("EnviromenT: " + os.environ.get("FLASK_ENV"))
 
 environment = os.environ.get("FLASK_ENV")
 app = Flask(__name__)
-
+app.secret_key = os.environ.get("SECRET_KEY")
 
 if environment == "development":
     # print("Development environment")
