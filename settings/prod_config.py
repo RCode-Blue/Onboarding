@@ -81,6 +81,8 @@ class ProdConfig:
         "port": db_port,
     }
 
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = db_uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False

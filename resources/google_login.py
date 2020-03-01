@@ -86,6 +86,7 @@ class GoogleLogout(Resource):
         print("<< -- --- GoogleLogout --- -- >>")
         session.pop("user_id", None)
         session.modified = True
+        # session.permanent = True
         # return redirect("http://localhost:3000")
         return redirect("https://lit-harbor-79520.herokuapp.com/")
 

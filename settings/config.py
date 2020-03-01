@@ -7,7 +7,7 @@ import os
 
 
 class DefaultConfig:
-    SECRET_KEY = os.urandom(24)
+    # SECRET_KEY = os.urandom(24)
 
     JWT_SECRET_KEY = os.urandom(36)
     JWT_TOKEN_LOCATION = "cookies"
