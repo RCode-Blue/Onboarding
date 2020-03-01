@@ -16,6 +16,7 @@ environment = os.environ.get("FLASK_ENV")
 # print("----- google_login environment: " + environment + "-----")
 # from oa import google
 
+my_var = "blah"
 
 if environment == "development":
     # print("Development environment")
@@ -97,7 +98,7 @@ class GetCurrentUser(Resource):
         print("|--- GetCurrentUser ---")
         print("GetCurrentUser Session:")
         print(session)
-
+        print(my_var)
 
         if "user_id" in session:
             if session["user_id"]:
