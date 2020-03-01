@@ -97,6 +97,10 @@ class GetCurrentUser(Resource):
         print("|--- GetCurrentUser ---")
         print("GetCurrentUser Session:")
         print(session)
+
+        print(os.environ.get("SECRET_KEY"))
+        print(os.environ.get("JWT_SECRET_KEY"))
+
         if "user_id" in session:
             if session["user_id"]:
                 return {"user_id": session["user_id"]}
