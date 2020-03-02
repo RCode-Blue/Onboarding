@@ -12,7 +12,6 @@ from flask_jwt_extended import (
 
 from models.user import UserModel
 
-# from models.login import LoginModel
 
 environment = os.environ.get("FLASK_ENV")
 # print("----- google_login environment: " + environment + "-----")
@@ -87,8 +86,8 @@ class GoogleAuthorize(Resource):
         print("Google Authorize Session:")
         print(session)
 
-        return redirect("http://localhost:3000/")
-        # return redirect("https://lit-harbor-79520.herokuapp.com/")
+        # return redirect("http://localhost:3000/")
+        return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GoogleLogout(Resource):
@@ -99,8 +98,8 @@ class GoogleLogout(Resource):
         session.modified = True
         # session.permanent = True
 
-        return redirect("http://localhost:3000")
-        # return redirect("https://lit-harbor-79520.herokuapp.com/")
+        # return redirect("http://localhost:3000")
+        return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GetCurrentUser(Resource):
