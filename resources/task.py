@@ -19,6 +19,7 @@ class Task(Resource):
     # GET
     def get(self):
         data = Task.parser.parse_args()
+        print(data)
         task = TaskModel.find_by_id(data["task_id"])
         if task:
             return task.json()

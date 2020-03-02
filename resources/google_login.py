@@ -9,14 +9,15 @@ from flask_jwt_extended import (
     get_jwt_identity,
 )
 
+
 from models.user import UserModel
 
+# from models.login import LoginModel
 
 environment = os.environ.get("FLASK_ENV")
 # print("----- google_login environment: " + environment + "-----")
 # from oa import google
 
-my_var = "blah"
 
 if environment == "development":
     # print("Development environment")
@@ -72,13 +73,22 @@ class GoogleAuthorize(Resource):
         access_token = create_access_token(identity=user.id, fresh=True)
         refresh_token = create_refresh_token(user.id)
 
+        # region - DB
+        # user_login = LoginModel.find_by_userid(user.id)
+        # new_userlogin = LoginModel(
+        #     user.id
+        # )
+        # new_userlogin.save_to_db()
+        # time.sleep(5.5)
+        # endregion
+
         session["user_id"] = user.id
         session.permanent = True
         print("Google Authorize Session:")
         print(session)
 
-        # return redirect("http://localhost:3000/")
-        return redirect("https://lit-harbor-79520.herokuapp.com/")
+        return redirect("http://localhost:3000/")
+        # return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GoogleLogout(Resource):
@@ -88,8 +98,9 @@ class GoogleLogout(Resource):
         session.pop("user_id", None)
         session.modified = True
         # session.permanent = True
-        # return redirect("http://localhost:3000")
-        return redirect("https://lit-harbor-79520.herokuapp.com/")
+
+        return redirect("http://localhost:3000")
+        # return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 class GetCurrentUser(Resource):
@@ -98,7 +109,6 @@ class GetCurrentUser(Resource):
         print("|--- GetCurrentUser ---")
         print("GetCurrentUser Session:")
         print(session)
-        print(my_var)
 
         if "user_id" in session:
             if session["user_id"]:

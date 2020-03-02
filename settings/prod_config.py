@@ -88,4 +88,5 @@ class ProdConfig:
     SQLALCHEMY_DATABASE_URI = db_uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PROPOGATE_EXCEPTIONS = True
+    SESSION_TYPE = "sqlalchemy"
 

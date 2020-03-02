@@ -9,6 +9,10 @@ from flask_jwt_extended import JWTManager
 # from flask_env import MetaFlaskEnv
 from datetime import timedelta
 
+from flask_sessionstore import Session
+
+# from flask.ext.session import Session
+
 from resources.task import Task, Tasks, UnallocatedTasks
 from resources.sequence import Sequence, Sequences, TaskList, UserTask
 from resources.position import Position, Positions
@@ -28,10 +32,10 @@ print("EnviromenT: " + os.environ.get("FLASK_ENV"))
 
 environment = os.environ.get("FLASK_ENV")
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY")
+# Session(app)
 
 if environment == "development":
-    # print("Development environment")
+    print("Development environment")
     # from settings.config import DevConfig
     from settings.dev_config import DevConfig
 
@@ -42,7 +46,6 @@ if environment == "test":
     from settings.test_config import TestConfig
 
     app.config.from_object(TestConfig)
-
 
 if environment == "production":
     # print("Production environment")
@@ -59,7 +62,6 @@ from resources.google_login import (
     GetCurrentUser,
 )
 
-
 # Configs & initialisations
 # load_dotenv(".env")
 # app = Flask(__name__)
@@ -75,6 +77,7 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Endpoints
+# region
 print("Loading endpoints...")
 api.add_resource(Users, "/api/users")
 api.add_resource(User, "/api/user/<string:userid>")
@@ -105,7 +108,7 @@ api.add_resource(
 
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
-
+# endregion
 
 from db import db
 
@@ -114,6 +117,10 @@ db.init_app(app)
 # Main
 if __name__ == "__main__":
     # from db import db
-
     # db.init_app(app)
+
+    sess = Session()
+
+    sess.init_app(app)
+    # Session(app).app.session_interface.db.create_all()
     app.run(port=5000, debug=True)
