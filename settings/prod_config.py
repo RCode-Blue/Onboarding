@@ -1,6 +1,8 @@
 import os
 from flask import g
 from flask_oauthlib.client import OAuth
+from db import db
+
 
 google_auth_consumer_key = os.environ.get("GOOGLE_AUTH_CONSUMER_KEY")
 google_auth_consumer_secret = os.environ.get("GOOGLE_AUTH_CONSUMER_SECRET")
@@ -88,5 +90,8 @@ class ProdConfig:
     SQLALCHEMY_DATABASE_URI = db_uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PROPOGATE_EXCEPTIONS = True
+
     SESSION_TYPE = "sqlalchemy"
+    SESSION_SQLALCHEMY_TABLE = "userlogins"
+    SESSION_SQLALCHEMY = db
 
