@@ -1,16 +1,14 @@
-# import libraries
-
 import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
+# from flask_session import Session
+# from flask_login import LoginManager
 
-# from flask_env import MetaFlaskEnv
 from datetime import timedelta
 
-from flask_sessionstore import Session
-
+# from flask_sessionstore import Session
 # from flask.ext.session import Session
 
 from resources.task import Task, Tasks, UnallocatedTasks
@@ -22,17 +20,19 @@ from resources.set import Set, Sets, AddSequence
 
 from settings.config import DefaultConfig
 
-# from settings.dev_config import DevConfig
 
-# from config import DefaultConfig
+# login_manager = LoginManager()
+
+
 print("<<<<< <<<< <<< << <! --- !> >> >>> >>>> >>>>>")
+print("Starting app...")
 print("EnviromenT: " + os.environ.get("FLASK_ENV"))
 # print(SQLALCHEMY_DATABASE_URI)
-# environment = os.environ.get("FLASK_ENV")
+
 
 environment = os.environ.get("FLASK_ENV")
 app = Flask(__name__)
-# Session(app)
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 if environment == "development":
     print("Development environment")
@@ -53,23 +53,22 @@ if environment == "production":
 
     app.config.from_object(ProdConfig)
 
+app.config.from_object(DefaultConfig)
 
-# from dotenv import load_dotenv
+
+# sess = Session(app)
+# sess.app.session_interface.db.create_all()
+
+
 from resources.google_login import (
     GoogleLogin,
     GoogleAuthorize,
     GoogleLogout,
     GetCurrentUser,
+    # GoogleAuthorise,  # client-side
+    # GoogleLoginFE,  # clinet-side
 )
 
-# Configs & initialisations
-# load_dotenv(".env")
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-print("Starting app...")
-app.config.from_object(DefaultConfig)
 
 app.permanent_session_lifetime = timedelta(minutes=5)
 
@@ -102,25 +101,29 @@ api.add_resource(TaskList, "/api/tasklist/<int:set_id>")
 api.add_resource(UserTask, "/api/usertask")
 
 api.add_resource(GoogleLogin, "/login/google")
+# api.add_resource(GoogleLoginFE, "/login/googlefe")
+
 api.add_resource(
     GoogleAuthorize, "/login/google/authorized", endpoint="google.authorize",
 )
+
+# Front-End
+# api.add_resource(
+#     GoogleAuthorise, "/api/login/google/authorised", endpoint="google.authorise",
+# )
 
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
 # endregion
 
-from db import db
 
-db.init_app(app)
+from flask_cors import CORS
 
 # Main
 if __name__ == "__main__":
-    # from db import db
-    # db.init_app(app)
+    from db import db
 
-    sess = Session()
-
-    sess.init_app(app)
-    # Session(app).app.session_interface.db.create_all()
+    db.init_app(app)
+    CORS(app)
     app.run(port=5000, debug=True)
+

@@ -11,3 +11,4 @@ onboarding_dump
 .old
 delete_tables_postgres.py
 oa_sample.py
+offline_resources
