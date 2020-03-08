@@ -119,11 +119,18 @@ api.add_resource(GoogleLogout, "/api/logout")
 
 from flask_cors import CORS
 
+CORS(app)
+
+from db import db
+
+db.init_app(app)
+
+
 # Main
 if __name__ == "__main__":
-    from db import db
+    # from db import db
 
-    db.init_app(app)
-    CORS(app)
+    # db.init_app(app)
+    # CORS(app)
     app.run(port=5000, debug=True)
 

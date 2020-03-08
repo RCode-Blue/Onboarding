@@ -92,7 +92,7 @@ class GoogleAuthorize(Resource):
 
         session["user_id"] = user.id
         session.permanent = True
-        print("Google Authorize Session:")
+        print("---Google Authorize Session:")
         print(session)
 
         return redirect("http://localhost:3000/")
