@@ -125,7 +125,6 @@ from db import db
 
 db.init_app(app)
 
-app.run()
 
 # Main
 if __name__ == "__main__":
