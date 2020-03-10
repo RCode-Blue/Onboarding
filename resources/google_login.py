@@ -37,15 +37,6 @@ class GoogleLogin(Resource):
     def get(cls):
         print(("<- -- --- GoogleLogin --- -- ->"))
         return google.authorize(url_for("google.authorize", _external=True))
-        # front-end below:
-        # return google.authorize(url_for("google.authorise", _external=True))
-
-
-# class GoogleLoginFE(Resource):
-#     @classmethod
-#     def get(cls):
-#         print(("<- -- --- GoogleLogin --- -- ->"))
-#         return google.authorize(url_for("google.authorize", _external=True))
 
 
 class GoogleAuthorize(Resource):
@@ -125,48 +116,55 @@ class GetCurrentUser(Resource):
 
 
 # region Client-Side
-# class GoogleAuthorise(Resource):
-#     @classmethod
-#     def get(cls):
-#         print("------googleAuthoriSe-----")
-#         resp = google.authorized_response()
-#         print(resp)
-#         if resp is None or resp.get("access_token") is None:
-#             error_response = {
-#                 "error": request.args["error"],
-#                 "error_description": request.args["error_description"],
-#             }
-#             return error_response
 
-#         g.access_token = resp["access_token"]
-#         google_user = google.get("userinfo")
-#         google_email = google_user.data["email"]
-#         # google_id = google.user.data['id']
-#         # print(google_user.data)
 
-#         user = UserModel.find_by_email(google_email)
-#         if not user:
-#             newUser = UserModel(
-#                 google_email,
-#                 google_user.data["given_name"],
-#                 google_user.data["family_name"],
-#             )
-#             newUser.save_to_db()
-#             time.sleep(5.5)
-#             # TODO: implement "try again" code for the above, perhaps using Tenacity
+class GoogleLoginFE(Resource):
+    @classmethod
+    def get(cls):
+        print(("<- -- --- GoogleLoginFE --- -- ->"))
+        return google.authorize(url_for("google.authorizefe", _external=True))
 
-#         # access_token = create_access_token(identity=user.id, fresh=True)
-#         # refresh_token = create_refresh_token(user.id)
 
-#         # session["user_id"] = user.id
-#         # session.permanent = True
-#         # print("Google Authorize Session:")
-#         # print(session)
+class GoogleAuthorizeFE(Resource):
+    @classmethod
+    def get(cls):
+        print("------googleAuthoriSeFE-----")
+        resp = google.authorized_response()
+        print(resp)
+        if resp is None or resp.get("access_token") is None:
+            error_response = {
+                "error": request.args["error"],
+                "error_description": request.args["error_description"],
+            }
+            return error_response
 
-#         return {"user_id": user.id}
+        g.access_token = resp["access_token"]
+        google_user = google.get("userinfo")
+        google_email = google_user.data["email"]
 
-#         return redirect("http://localhost:3000/")
-#         # return redirect("https://lit-harbor-79520.herokuapp.com/")
+        user = UserModel.find_by_email(google_email)
+        if not user:
+            newUser = UserModel(
+                google_email,
+                google_user.data["given_name"],
+                google_user.data["family_name"],
+            )
+            newUser.save_to_db()
+            time.sleep(5.5)
+            # TODO: implement "try again" code for the above, perhaps using Tenacity
+
+        # access_token = create_access_token(identity=user.id, fresh=True)
+        # refresh_token = create_refresh_token(user.id)
+
+        # session["user_id"] = user.id
+        # session.permanent = True
+        # print("Google Authorize Session:")
+        # print(session)
+
+        return {"user_id": user.id}
+
+        return redirect("http://localhost:3000/")
+        # return redirect("https://lit-harbor-79520.herokuapp.com/")
 
 
 # endregion

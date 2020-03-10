@@ -65,8 +65,8 @@ from resources.google_login import (
     GoogleAuthorize,
     GoogleLogout,
     GetCurrentUser,
-    # GoogleAuthorise,  # client-side
-    # GoogleLoginFE,  # clinet-side
+    GoogleAuthorizeFE,  # client-side
+    GoogleLoginFE,  # clinet-side
 )
 
 
@@ -107,13 +107,18 @@ api.add_resource(
     GoogleAuthorize, "/login/google/authorized", endpoint="google.authorize",
 )
 
-# Front-End
-# api.add_resource(
-#     GoogleAuthorise, "/api/login/google/authorised", endpoint="google.authorise",
-# )
-
 api.add_resource(GetCurrentUser, "/api/getcurrentuser")
 api.add_resource(GoogleLogout, "/api/logout")
+
+# Front-End
+
+api.add_resource(GoogleLoginFE, "/login/googlefe")
+
+api.add_resource(
+    GoogleAuthorizeFE, "/api/login/google/authorizedfe", endpoint="google.authorizefe",
+)
+
+
 # endregion
 
 
